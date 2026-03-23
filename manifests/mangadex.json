@@ -1,0 +1,133 @@
+  {
+    "id": "mangadex",
+    "name": "MangaDex",
+    "version": 1,
+    "lang": "en",
+    "baseUrl": "https://api.mangadex.org",
+    "contentType": "image",
+    "isApi": true,
+    "supportsLatest": true,
+    "rateLimit": {
+      "requests": 5,
+      "perSeconds": 1
+    },
+    "headers": {
+      "User-Agent": "Bookworm/0.1.0"
+    },
+    "endpoints": {
+      "search": {
+        "path": "/manga",
+        "params": {
+          "title": "{query}",
+          "limit": "20",
+          "offset": "{(page-1)*20}",
+          "includes[]": "cover_art",
+          "order[relevance]": "desc"
+        },
+        "mapping": {
+          "list": "$.data",
+          "id": "id",
+          "title": "attributes.title.en",
+          "description": "attributes.description.en",
+          "status": "attributes.status",
+          "coverUrl": "https://uploads.mangadex.org/covers/{id}/{$.relationships[?(@.type=='cover_art')].attributes.fileName}.256.jpg"
+        },
+        "nextPagePath": "$.data"
+      },
+      "popular": {
+        "path": "/manga",
+        "params": {
+          "limit": "20",
+          "offset": "{(page-1)*20}",
+          "includes[]": "cover_art",
+          "order[followedCount]": "desc"
+        },
+        "mapping": {
+          "list": "$.data",
+          "id": "id",
+          "title": "attributes.title.en",
+          "description": "attributes.description.en",
+          "status": "attributes.status",
+          "coverUrl": "https://uploads.mangadex.org/covers/{id}/{$.relationships[?(@.type=='cover_art')].attributes.fileName}.256.jpg"
+        },
+        "nextPagePath": "$.data"
+      },
+      "latest": {
+        "path": "/manga",
+        "params": {
+          "limit": "20",
+          "offset": "{(page-1)*20}",
+          "includes[]": "cover_art",
+          "order[updatedAt]": "desc"
+        },
+        "mapping": {
+          "list": "$.data",
+          "id": "id",
+          "title": "attributes.title.en",
+          "description": "attributes.description.en",
+          "status": "attributes.status",
+          "coverUrl": "https://uploads.mangadex.org/covers/{id}/{$.relationships[?(@.type=='cover_art')].attributes.fileName}.256.jpg"
+        },
+        "nextPagePath": "$.data"
+      },
+      "details": {
+        "path": "/manga/{seriesId}",
+        "params": {
+          "includes[]": "cover_art,author,artist"
+        },
+        "mapping": {
+          "id": "$.data.id",
+          "title": "$.data.attributes.title.en",
+          "description": "$.data.attributes.description.en",
+          "status": "$.data.attributes.status",
+          "author": "$.data.relationships[?(@.type=='author')].attributes.name",
+          "coverUrl": "https://uploads.mangadex.org/covers/{seriesId}/{$.data.relationships[?(@.type=='cover_art')].attributes.fileName}.512.jpg"
+        }
+      },
+      "chapters": {
+        "path": "/manga/{seriesId}/feed",
+        "params": {
+          "translatedLanguage[]": "en",
+          "order[chapter]": "asc",
+          "limit": "500",
+          "offset": "0"
+        },
+        "mapping": {
+          "list": "$.data",
+          "id": "id",
+          "title": "attributes.title",
+          "chapterNumber": "attributes.chapter"
+        }
+      },
+      "pages": {
+        "path": "/at-home/server/{chapterId}",
+        "mapping": {
+          "baseUrl": "$.baseUrl",
+          "pages": "$.chapter.data",
+          "pageUrl": "{baseUrl}/data/{$.chapter.hash}/{page}"
+        }
+      }
+    },
+    "filters": [
+      {
+        "name": "Status",
+        "type": "select",
+        "param": "status[]",
+        "options": ["ongoing", "completed", "hiatus", "cancelled"]
+      },
+      {
+        "name": "Content Rating",
+        "type": "multiSelect",
+        "param": "contentRating[]",
+        "options": ["safe", "suggestive", "erotica"],
+        "defaultValue": ["safe", "suggestive"]
+      },
+      {
+        "name": "Sort By",
+        "type": "select",
+        "param": "order[relevance]",
+        "options": ["desc", "asc"],
+        "defaultValue": "desc"
+      }
+    ]
+  }
