@@ -1,0 +1,10 @@
+  [
+    {
+      "id": "mangadex",
+      "name": "MangaDex",
+      "version": 1,
+      "lang": "en",
+      "contentType": "image",
+      "iconUrl": "https://mangadex.org/favicon.ico"
+    }
+  ]
