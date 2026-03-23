@@ -1,15 +1,15 @@
   {
     "id": "ravenscans",
     "name": "Raven Scans (Yaksha)",
-    "version": 1,
+    "version": 2,
     "lang": "en",
     "baseUrl": "https://ravenscans.org",
     "contentType": "image",
-    "isApi": false,
+    "isApi": true,
     "supportsLatest": true,
-    "useWebView": true,
+    "useWebView": false,
     "rateLimit": {
-      "requests": 2,
+      "requests": 3,
       "perSeconds": 1
     },
     "headers": {
@@ -17,91 +17,83 @@
     },
     "endpoints": {
       "search": {
-        "path": "/",
+        "path": "/wp-json/wp/v2/categories",
         "params": {
-          "s": "{query}"
+          "search": "{query}",
+          "per_page": "20",
+          "page": "{page}"
         },
-        "selector": {
-          "list": ".bsx",
-          "id": "a@href | regex:/manga/([^/]+)/",
-          "title": "a@title",
-          "coverUrl": "img@src"
+        "mapping": {
+          "list": "$.data",
+          "id": "$.id",
+          "title": "$.name"
         },
-        "nextPageSelector": ".next"
+        "nextPagePath": "$.data"
       },
       "popular": {
-        "path": "/manga/",
+        "path": "/wp-json/wp/v2/categories",
         "params": {
-          "order": "popular",
+          "orderby": "count",
+          "order": "desc",
+          "per_page": "20",
           "page": "{page}"
         },
-        "selector": {
-          "list": ".bsx",
-          "id": "a@href | regex:/manga/([^/]+)/",
-          "title": "a@title",
-          "coverUrl": "img@src"
+        "mapping": {
+          "list": "$.data",
+          "id": "$.id",
+          "title": "$.name"
         },
-        "nextPageSelector": ".next"
+        "nextPagePath": "$.data"
       },
       "latest": {
-        "path": "/manga/",
+        "path": "/wp-json/wp/v2/categories",
         "params": {
-          "order": "update",
+          "orderby": "count",
+          "order": "desc",
+          "per_page": "20",
           "page": "{page}"
         },
-        "selector": {
-          "list": ".bsx",
-          "id": "a@href | regex:/manga/([^/]+)/",
-          "title": "a@title",
-          "coverUrl": "img@src"
+        "mapping": {
+          "list": "$.data",
+          "id": "$.id",
+          "title": "$.name"
         },
-        "nextPageSelector": ".next"
+        "nextPagePath": "$.data"
       },
       "details": {
-        "path": "/manga/{seriesId}/",
-        "selector": {
-          "title": "h1@text",
-          "description": ".synopsis@text",
-          "coverUrl": "img[title]@src",
-          "status": ".tsinfo .imptdt i@text"
+        "path": "/wp-json/wp/v2/categories/{seriesId}",
+        "mapping": {
+          "id": "$.id",
+          "title": "$.name",
+          "description": "$.description"
         }
       },
       "chapters": {
-        "path": "/manga/{seriesId}/",
-        "selector": {
-          "list": "#chapterlist li",
-          "id": "a@href | regex:org/([^/]+)/",
-          "title": "a .chapternum@text",
-          "dateUploaded": "a .chapterdate@text"
+        "path": "/wp-json/wp/v2/posts",
+        "params": {
+          "categories": "{seriesId}",
+          "per_page": "100",
+          "orderby": "date",
+          "order": "asc",
+          "_fields": "id,title,date,content"
+        },
+        "mapping": {
+          "list": "$.data",
+          "id": "$.id",
+          "title": "$.title.rendered",
+          "dateUploaded": "$.date"
         }
       },
       "pages": {
-        "path": "/{chapterSlug}/",
-        "selector": {
-          "list": "#readerarea img",
-          "url": "@src"
+        "path": "/wp-json/wp/v2/posts/{chapterSlug}",
+        "params": {
+          "_fields": "id,title,content"
+        },
+        "mapping": {
+          "htmlField": "$.content.rendered",
+          "htmlSelector": "img@src",
+          "title": "$.title.rendered"
         }
       }
-    },
-    "filters": [
-      {
-        "name": "Genre",
-        "type": "select",
-        "param": "genre[]",
-        "options": ["action", "adventure", "comedy", "drama", "fantasy", "martial-arts", "romance", "sci-fi", "slice-of-life"]
-      },
-      {
-        "name": "Status",
-        "type": "select",
-        "param": "status",
-        "options": ["ongoing", "completed", "hiatus"]
-      },
-      {
-        "name": "Order By",
-        "type": "select",
-        "param": "order",
-        "options": ["update", "popular", "latest", "title"],
-        "defaultValue": "popular"
-      }
-    ]
+    }
   }
