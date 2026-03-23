@@ -1,7 +1,7 @@
   {
         "id": "mangadex",
         "name": "MangaDex",
-        "version": 3,
+        "version": 5,
         "lang": "en",
         "baseUrl": "https://api.mangadex.org",
         "contentType": "image",
@@ -100,7 +100,8 @@
                                 "list": "$.data",
                                 "id": "$.id",
                                 "title": "$.attributes.title",
-                                "chapterNumber": "$.attributes.chapter"
+                                "chapterNumber": "$.attributes.chapter",
+                                "dateUploaded": "$.attributes.publishAt"
                     }
           },
           "pages": {
