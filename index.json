@@ -6,5 +6,12 @@
       "lang": "en",
       "contentType": "image",
       "iconUrl": "https://mangadex.org/favicon.ico"
+    },
+    {
+      "id": "ravenscans",
+      "name": "Raven Scans (Yaksha)",
+      "version": 1,
+      "lang": "en",
+      "contentType": "image"
     }
   ]
