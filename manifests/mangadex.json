@@ -104,7 +104,7 @@
                     }
           },
           "pages": {
-                    "path": "/at-home/server/{chapterId}",
+                    "path": "/at-home/server/{chapterSlug}",
                     "mapping": {
                                 "baseUrl": "$.baseUrl",
                                 "pages": "$.chapter.data",
