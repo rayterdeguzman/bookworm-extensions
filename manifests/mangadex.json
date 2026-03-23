@@ -1,7 +1,7 @@
   {
         "id": "mangadex",
         "name": "MangaDex",
-        "version": 2,
+        "version": 3,
         "lang": "en",
         "baseUrl": "https://api.mangadex.org",
         "contentType": "image",
@@ -28,7 +28,7 @@
                           "mapping": {
                                       "list": "$.data",
                                       "id": "$.id",
-                                      "title": "$.attributes.title.en",
+                                      "title": "$.attributes.title.en || $.attributes.title.ja-ro || $.attributes.title.*",
                                       "description": "$.attributes.description.en",
                                       "status": "$.attributes.status",
                                       "coverUrl": "https://uploads.mangadex.org/covers/{$.id}/{$.relationships[?@.type=='cover_art'].attributes.fileName}.256.jpg"
@@ -47,7 +47,7 @@
                           "mapping": {
                                       "list": "$.data",
                                       "id": "$.id",
-                                      "title": "$.attributes.title.en",
+                                      "title": "$.attributes.title.en || $.attributes.title.ja-ro || $.attributes.title.*",
                                       "description": "$.attributes.description.en",
                                       "status": "$.attributes.status",
                                       "coverUrl": "https://uploads.mangadex.org/covers/{$.id}/{$.relationships[?@.type=='cover_art'].attributes.fileName}.256.jpg"
@@ -66,7 +66,7 @@
                           "mapping": {
                                       "list": "$.data",
                                       "id": "$.id",
-                                      "title": "$.attributes.title.en",
+                                      "title": "$.attributes.title.en || $.attributes.title.ja-ro || $.attributes.title.*",
                                       "description": "$.attributes.description.en",
                                       "status": "$.attributes.status",
                                       "coverUrl": "https://uploads.mangadex.org/covers/{$.id}/{$.relationships[?@.type=='cover_art'].attributes.fileName}.256.jpg"
@@ -80,7 +80,7 @@
                           },
                           "mapping": {
                                       "id": "$.data.id",
-                                      "title": "$.data.attributes.title.en",
+                                      "title": "$.data.attributes.title.en || $.data.attributes.title.ja-ro || $.data.attributes.title.*",
                                       "description": "$.data.attributes.description.en",
                                       "status": "$.data.attributes.status",
                                       "author": "$.data.relationships[?@.type=='author'].attributes.name",
