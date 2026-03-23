@@ -1,7 +1,7 @@
   {
     "id": "ravenscans",
     "name": "Raven Scans (Yaksha)",
-    "version": 2,
+    "version": 3,
     "lang": "en",
     "baseUrl": "https://ravenscans.org",
     "contentType": "image",
@@ -24,11 +24,11 @@
           "page": "{page}"
         },
         "mapping": {
-          "list": "$.data",
+          "list": "$",
           "id": "$.id",
           "title": "$.name"
         },
-        "nextPagePath": "$.data"
+        "nextPagePath": "$"
       },
       "popular": {
         "path": "/wp-json/wp/v2/categories",
@@ -39,11 +39,11 @@
           "page": "{page}"
         },
         "mapping": {
-          "list": "$.data",
+          "list": "$",
           "id": "$.id",
           "title": "$.name"
         },
-        "nextPagePath": "$.data"
+        "nextPagePath": "$"
       },
       "latest": {
         "path": "/wp-json/wp/v2/categories",
@@ -54,11 +54,11 @@
           "page": "{page}"
         },
         "mapping": {
-          "list": "$.data",
+          "list": "$",
           "id": "$.id",
           "title": "$.name"
         },
-        "nextPagePath": "$.data"
+        "nextPagePath": "$"
       },
       "details": {
         "path": "/wp-json/wp/v2/categories/{seriesId}",
@@ -78,7 +78,7 @@
           "_fields": "id,title,date,content"
         },
         "mapping": {
-          "list": "$.data",
+          "list": "$",
           "id": "$.id",
           "title": "$.title.rendered",
           "dateUploaded": "$.date"
