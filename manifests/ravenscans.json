@@ -1,0 +1,107 @@
+  {
+    "id": "ravenscans",
+    "name": "Raven Scans (Yaksha)",
+    "version": 1,
+    "lang": "en",
+    "baseUrl": "https://ravenscans.org",
+    "contentType": "image",
+    "isApi": false,
+    "supportsLatest": true,
+    "useWebView": true,
+    "rateLimit": {
+      "requests": 2,
+      "perSeconds": 1
+    },
+    "headers": {
+      "Referer": "https://ravenscans.org/"
+    },
+    "endpoints": {
+      "search": {
+        "path": "/",
+        "params": {
+          "s": "{query}"
+        },
+        "selector": {
+          "list": ".bsx",
+          "id": "a@href | regex:/manga/([^/]+)/",
+          "title": "a@title",
+          "coverUrl": "img@src"
+        },
+        "nextPageSelector": ".next"
+      },
+      "popular": {
+        "path": "/manga/",
+        "params": {
+          "order": "popular",
+          "page": "{page}"
+        },
+        "selector": {
+          "list": ".bsx",
+          "id": "a@href | regex:/manga/([^/]+)/",
+          "title": "a@title",
+          "coverUrl": "img@src"
+        },
+        "nextPageSelector": ".next"
+      },
+      "latest": {
+        "path": "/manga/",
+        "params": {
+          "order": "update",
+          "page": "{page}"
+        },
+        "selector": {
+          "list": ".bsx",
+          "id": "a@href | regex:/manga/([^/]+)/",
+          "title": "a@title",
+          "coverUrl": "img@src"
+        },
+        "nextPageSelector": ".next"
+      },
+      "details": {
+        "path": "/manga/{seriesId}/",
+        "selector": {
+          "title": "h1@text",
+          "description": ".synopsis@text",
+          "coverUrl": "img[title]@src",
+          "status": ".tsinfo .imptdt i@text"
+        }
+      },
+      "chapters": {
+        "path": "/manga/{seriesId}/",
+        "selector": {
+          "list": "#chapterlist li",
+          "id": "a@href | regex:org/([^/]+)/",
+          "title": "a .chapternum@text",
+          "dateUploaded": "a .chapterdate@text"
+        }
+      },
+      "pages": {
+        "path": "/{chapterSlug}/",
+        "selector": {
+          "list": "#readerarea img",
+          "url": "@src"
+        }
+      }
+    },
+    "filters": [
+      {
+        "name": "Genre",
+        "type": "select",
+        "param": "genre[]",
+        "options": ["action", "adventure", "comedy", "drama", "fantasy", "martial-arts", "romance", "sci-fi", "slice-of-life"]
+      },
+      {
+        "name": "Status",
+        "type": "select",
+        "param": "status",
+        "options": ["ongoing", "completed", "hiatus"]
+      },
+      {
+        "name": "Order By",
+        "type": "select",
+        "param": "order",
+        "options": ["update", "popular", "latest", "title"],
+        "defaultValue": "popular"
+      }
+    ]
+  }
