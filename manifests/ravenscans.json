@@ -19,20 +19,44 @@
     {
       "name": "Order",
       "type": "select",
-      "options": ["popular", "update", "latest", "title", "titlereverse"],
+      "options": ["Popular", "Latest Update", "Latest Added", "A-Z", "Z-A"],
+      "values": ["popular", "update", "latest", "title", "titlereverse"],
       "defaultValue": "popular"
     },
     {
       "name": "Status",
       "type": "select",
-      "options": ["", "ongoing", "completed", "hiatus"],
+      "options": ["All", "Ongoing", "Completed", "Hiatus"],
+      "values": ["", "ongoing", "completed", "hiatus"],
       "defaultValue": ""
     },
     {
       "name": "Type",
       "type": "select",
-      "options": ["", "manga", "manhwa", "manhua", "comic", "novel"],
+      "options": ["All", "Manga", "Manhwa", "Manhua", "Comic", "Novel"],
+      "values": ["", "manga", "manhwa", "manhua", "comic", "novel"],
       "defaultValue": ""
+    },
+    {
+      "name": "Genre",
+      "type": "multiSelect",
+      "options": [
+        "Action", "Adult", "Adventure", "Comedy", "Drama", "Ecchi",
+        "Fantasy", "Gender Bender", "Harem", "Historical", "Horror",
+        "Josei", "Martial Arts", "Mature", "Mecha", "Mystery",
+        "Psychological", "Romance", "School Life", "Sci-fi", "Seinen",
+        "Shoujo", "Shoujo Ai", "Shounen", "Shounen Ai", "Slice of Life",
+        "Smut", "Sports", "Supernatural", "Tragedy", "Yaoi", "Yuri"
+      ],
+      "values": [
+        "4", "43", "27", "5", "12", "13",
+        "6", "51", "14", "7", "33",
+        "44", "8", "45", "59", "46",
+        "47", "9", "28", "40", "49",
+        "50", "52", "10", "53", "54",
+        "48", "55", "24", "56", "57", "58"
+      ],
+      "defaultValue": []
     }
   ],
   "endpoints": {
@@ -44,7 +68,8 @@
         "page": "{page}",
         "order": "{Order}",
         "status": "{Status}",
-        "type": "{Type}"
+        "type": "{Type}",
+        "genre[]": "{Genre}"
       },
       "selector": {
         "list": "div.bsx",
