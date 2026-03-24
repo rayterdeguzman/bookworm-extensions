@@ -125,7 +125,8 @@
       "selector": {
         "list": "#chapterlist ul li",
         "id": ".eph-num a@href | regex:/([^\\/]+)\\/?$/",
-        "title": ".chapternum"
+        "title": ".chapternum",
+        "dateUploaded": ".chapterdate"
       }
     },
     "pages": {
