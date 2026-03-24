@@ -1,99 +1,92 @@
-  {
-    "id": "ravenscans",
-    "name": "Raven Scans (Yaksha)",
-    "version": 3,
-    "lang": "en",
-    "baseUrl": "https://ravenscans.org",
-    "contentType": "image",
-    "isApi": true,
-    "supportsLatest": true,
-    "useWebView": false,
-    "rateLimit": {
-      "requests": 3,
-      "perSeconds": 1
+{
+  "id": "ravenscans",
+  "name": "Raven Scans (Yaksha)",
+  "version": 4,
+  "lang": "en",
+  "baseUrl": "https://ravenscans.org",
+  "contentType": "image",
+  "isApi": true,
+  "supportsLatest": true,
+  "useWebView": false,
+  "rateLimit": {
+    "requests": 3,
+    "perSeconds": 1
+  },
+  "headers": {
+    "Referer": "https://ravenscans.org/"
+  },
+  "endpoints": {
+    "search": {
+      "path": "/wp-json/wp/v2/categories",
+      "params": {
+        "search": "{query}",
+        "per_page": "20",
+        "page": "{page}"
+      },
+      "mapping": {
+        "list": "$",
+        "id": "$.slug",
+        "title": "$.name"
+      },
+      "nextPagePath": "$"
     },
-    "headers": {
-      "Referer": "https://ravenscans.org/"
+    "popular": {
+      "path": "/wp-json/wp/v2/categories",
+      "params": {
+        "orderby": "count",
+        "order": "desc",
+        "per_page": "20",
+        "page": "{page}"
+      },
+      "mapping": {
+        "list": "$",
+        "id": "$.slug",
+        "title": "$.name"
+      },
+      "nextPagePath": "$"
     },
-    "endpoints": {
-      "search": {
-        "path": "/wp-json/wp/v2/categories",
-        "params": {
-          "search": "{query}",
-          "per_page": "20",
-          "page": "{page}"
-        },
-        "mapping": {
-          "list": "$",
-          "id": "$.id",
-          "title": "$.name"
-        },
-        "nextPagePath": "$"
+    "latest": {
+      "path": "/wp-json/wp/v2/categories",
+      "params": {
+        "orderby": "count",
+        "order": "desc",
+        "per_page": "20",
+        "page": "{page}"
       },
-      "popular": {
-        "path": "/wp-json/wp/v2/categories",
-        "params": {
-          "orderby": "count",
-          "order": "desc",
-          "per_page": "20",
-          "page": "{page}"
-        },
-        "mapping": {
-          "list": "$",
-          "id": "$.id",
-          "title": "$.name"
-        },
-        "nextPagePath": "$"
+      "mapping": {
+        "list": "$",
+        "id": "$.slug",
+        "title": "$.name"
       },
-      "latest": {
-        "path": "/wp-json/wp/v2/categories",
-        "params": {
-          "orderby": "count",
-          "order": "desc",
-          "per_page": "20",
-          "page": "{page}"
-        },
-        "mapping": {
-          "list": "$",
-          "id": "$.id",
-          "title": "$.name"
-        },
-        "nextPagePath": "$"
-      },
-      "details": {
-        "path": "/wp-json/wp/v2/categories/{seriesId}",
-        "mapping": {
-          "id": "$.id",
-          "title": "$.name",
-          "description": "$.description"
-        }
-      },
-      "chapters": {
-        "path": "/wp-json/wp/v2/posts",
-        "params": {
-          "categories": "{seriesId}",
-          "per_page": "100",
-          "orderby": "date",
-          "order": "asc",
-          "_fields": "id,title,date,content"
-        },
-        "mapping": {
-          "list": "$",
-          "id": "$.id",
-          "title": "$.title.rendered",
-          "dateUploaded": "$.date"
-        }
-      },
-      "pages": {
-        "path": "/wp-json/wp/v2/posts/{chapterSlug}",
-        "params": {
-          "_fields": "id,title,content"
-        },
-        "mapping": {
-          "htmlField": "$.content.rendered",
-          "htmlSelector": "img@src",
-          "title": "$.title.rendered"
-        }
+      "nextPagePath": "$"
+    },
+    "details": {
+      "path": "/manga/{seriesId}/",
+      "isApi": false,
+      "selector": {
+        "title": "h1.entry-title",
+        "coverUrl": "div.thumb img@src",
+        "description": "div.entry-content.entry-content-single",
+        "status": ".tsinfo .imptdt:first-child i"
+      }
+    },
+    "chapters": {
+      "path": "/manga/{seriesId}/",
+      "isApi": false,
+      "selector": {
+        "list": "#chapterlist ul li",
+        "id": ".eph-num a@href | regex:/([^\\/]+)\\/?$/",
+        "title": ".chapternum"
+      }
+    },
+    "pages": {
+      "path": "/{chapterSlug}/",
+      "isApi": false,
+      "selector": {
+        "pages": "#readerarea img",
+        "src": "src",
+        "title": "h1.entry-title"
       }
     }
   }
+}
