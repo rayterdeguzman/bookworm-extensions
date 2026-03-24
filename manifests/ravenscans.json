@@ -1,7 +1,7 @@
 {
   "id": "ravenscans",
   "name": "Raven Scans (Yaksha)",
-  "version": 4,
+  "version": 5,
   "lang": "en",
   "baseUrl": "https://ravenscans.org",
   "contentType": "image",
@@ -15,50 +15,74 @@
   "headers": {
     "Referer": "https://ravenscans.org/"
   },
+  "filters": [
+    {
+      "name": "Order",
+      "type": "select",
+      "options": ["popular", "update", "latest", "title", "titlereverse"],
+      "defaultValue": "popular"
+    },
+    {
+      "name": "Status",
+      "type": "select",
+      "options": ["", "ongoing", "completed", "hiatus"],
+      "defaultValue": ""
+    },
+    {
+      "name": "Type",
+      "type": "select",
+      "options": ["", "manga", "manhwa", "manhua", "comic", "novel"],
+      "defaultValue": ""
+    }
+  ],
   "endpoints": {
     "search": {
-      "path": "/wp-json/wp/v2/categories",
+      "path": "/manga/",
+      "isApi": false,
       "params": {
-        "search": "{query}",
-        "per_page": "20",
-        "page": "{page}"
+        "s": "{query}",
+        "page": "{page}",
+        "order": "{Order}",
+        "status": "{Status}",
+        "type": "{Type}"
       },
-      "mapping": {
-        "list": "$",
-        "id": "$.slug",
-        "title": "$.name"
+      "selector": {
+        "list": "div.bsx",
+        "id": "a@href | regex:/\\/manga\\/([^\\/]+)/",
+        "title": ".tt",
+        "coverUrl": ".limit img@src"
       },
-      "nextPagePath": "$"
+      "nextPageSelector": "a.next.page-numbers"
     },
     "popular": {
-      "path": "/wp-json/wp/v2/categories",
+      "path": "/manga/",
+      "isApi": false,
       "params": {
-        "orderby": "count",
-        "order": "desc",
-        "per_page": "20",
+        "order": "popular",
         "page": "{page}"
       },
-      "mapping": {
-        "list": "$",
-        "id": "$.slug",
-        "title": "$.name"
+      "selector": {
+        "list": "div.bsx",
+        "id": "a@href | regex:/\\/manga\\/([^\\/]+)/",
+        "title": ".tt",
+        "coverUrl": ".limit img@src"
       },
-      "nextPagePath": "$"
+      "nextPageSelector": "a.next.page-numbers"
     },
     "latest": {
-      "path": "/wp-json/wp/v2/categories",
+      "path": "/manga/",
+      "isApi": false,
       "params": {
-        "orderby": "count",
-        "order": "desc",
-        "per_page": "20",
+        "order": "update",
         "page": "{page}"
       },
-      "mapping": {
-        "list": "$",
-        "id": "$.slug",
-        "title": "$.name"
+      "selector": {
+        "list": "div.bsx",
+        "id": "a@href | regex:/\\/manga\\/([^\\/]+)/",
+        "title": ".tt",
+        "coverUrl": ".limit img@src"
       },
-      "nextPagePath": "$"
+      "nextPageSelector": "a.next.page-numbers"
     },
     "details": {
       "path": "/manga/{seriesId}/",
