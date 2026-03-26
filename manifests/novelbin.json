@@ -1,7 +1,7 @@
 {
   "id": "novelbin",
   "name": "NovelBin",
-  "version": 10,
+  "version": 11,
   "lang": "en",
   "baseUrl": "https://novelbin.com",
   "contentType": "text",
@@ -25,9 +25,9 @@
     },
     {
       "name": "Genre",
-      "type": "select",
+      "type": "multiSelect",
       "options": [
-        "All", "Action", "Adventure", "Comedy", "Drama", "Ecchi",
+        "Action", "Adventure", "Comedy", "Drama", "Ecchi",
         "Fantasy", "Harem", "Historical", "Horror", "Josei",
         "Martial Arts", "Mature", "Mecha", "Mystery", "Psychological",
         "Romance", "School Life", "Sci-fi", "Seinen", "Shoujo",
@@ -35,39 +35,39 @@
         "Tragedy", "Wuxia", "Xianxia", "Xuanhuan"
       ],
       "values": [
-        "", "action", "adventure", "comedy", "drama", "ecchi",
+        "action", "adventure", "comedy", "drama", "ecchi",
         "fantasy", "harem", "historical", "horror", "josei",
         "martial-arts", "mature", "mecha", "mystery", "psychological",
         "romance", "school-life", "sci-fi", "seinen", "shoujo",
         "shounen", "slice-of-life", "smut", "sports", "supernatural",
         "tragedy", "wuxia", "xianxia", "xuanhuan"
       ],
-      "defaultValue": ""
+      "defaultValue": []
     },
     {
       "name": "Tag",
-      "type": "select",
+      "type": "multiSelect",
       "options": [
-        "All", "Adapted to Anime", "Adapted to Manga", "Beautiful Female Lead",
+        "Adapted to Anime", "Adapted to Manga", "Beautiful Female Lead",
         "Calm Protagonist", "Clever Protagonist", "Early Romance",
         "Evolution", "Game Elements", "Handsome Male Lead",
-        "Loli", "Cold Protagonist", "Male Protagonist", "Female Protagonist",
-        "Multiple Protagonists", "Overpowered Protagonist", "Weak to Strong",
+        "Cold Protagonist", "Male Protagonist", "Female Protagonist",
+        "Overpowered Protagonist", "Weak to Strong",
         "Transmigration", "Reincarnation", "System", "Cultivation",
-        "Harem", "Virtual Reality", "Dungeon", "Regression",
+        "Virtual Reality", "Dungeon", "Regression",
         "Kingdom Building", "Academy", "Time Travel"
       ],
       "values": [
-        "", "adapted-to-anime", "adapted-to-manga", "beautiful-female-lead",
+        "adapted-to-anime", "adapted-to-manga", "beautiful-female-lead",
         "calm-protagonist", "clever-protagonist", "early-romance",
         "evolution", "game-elements", "handsome-male-lead",
-        "loli", "cold-protagonist", "male-protagonist", "female-protagonist",
-        "multiple-protagonists", "overpowered-protagonist", "weak-to-strong",
+        "cold-protagonist", "male-protagonist", "female-protagonist",
+        "overpowered-protagonist", "weak-to-strong",
         "transmigration", "reincarnation", "system", "cultivation",
-        "harem-tag", "virtual-reality", "dungeon", "regression",
+        "virtual-reality", "dungeon", "regression",
         "kingdom-building", "academy", "time-travel"
       ],
-      "defaultValue": ""
+      "defaultValue": []
     }
   ],
   "endpoints": {
@@ -90,6 +90,10 @@
     "popular": {
       "path": "/sort/{Sort}",
       "isApi": false,
+      "pathOverrides": {
+        "Genre": "/genre/{Genre}",
+        "Tag": "/tag/{Tag}"
+      },
       "params": {
         "page": "{page}"
       },
