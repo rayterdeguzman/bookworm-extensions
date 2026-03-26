@@ -1,7 +1,7 @@
 {
   "id": "novelbin",
   "name": "NovelBin",
-  "version": 11,
+  "version": 12,
   "lang": "en",
   "baseUrl": "https://novelbin.com",
   "contentType": "text",
@@ -25,9 +25,9 @@
     },
     {
       "name": "Genre",
-      "type": "multiSelect",
+      "type": "select",
       "options": [
-        "Action", "Adventure", "Comedy", "Drama", "Ecchi",
+        "All", "Action", "Adventure", "Comedy", "Drama", "Ecchi",
         "Fantasy", "Harem", "Historical", "Horror", "Josei",
         "Martial Arts", "Mature", "Mecha", "Mystery", "Psychological",
         "Romance", "School Life", "Sci-fi", "Seinen", "Shoujo",
@@ -35,20 +35,20 @@
         "Tragedy", "Wuxia", "Xianxia", "Xuanhuan"
       ],
       "values": [
-        "action", "adventure", "comedy", "drama", "ecchi",
+        "", "action", "adventure", "comedy", "drama", "ecchi",
         "fantasy", "harem", "historical", "horror", "josei",
         "martial-arts", "mature", "mecha", "mystery", "psychological",
         "romance", "school-life", "sci-fi", "seinen", "shoujo",
         "shounen", "slice-of-life", "smut", "sports", "supernatural",
         "tragedy", "wuxia", "xianxia", "xuanhuan"
       ],
-      "defaultValue": []
+      "defaultValue": ""
     },
     {
       "name": "Tag",
-      "type": "multiSelect",
+      "type": "select",
       "options": [
-        "Adapted to Anime", "Adapted to Manga", "Beautiful Female Lead",
+        "All", "Adapted to Anime", "Adapted to Manga", "Beautiful Female Lead",
         "Calm Protagonist", "Clever Protagonist", "Early Romance",
         "Evolution", "Game Elements", "Handsome Male Lead",
         "Cold Protagonist", "Male Protagonist", "Female Protagonist",
@@ -58,7 +58,7 @@
         "Kingdom Building", "Academy", "Time Travel"
       ],
       "values": [
-        "adapted-to-anime", "adapted-to-manga", "beautiful-female-lead",
+        "", "adapted-to-anime", "adapted-to-manga", "beautiful-female-lead",
         "calm-protagonist", "clever-protagonist", "early-romance",
         "evolution", "game-elements", "handsome-male-lead",
         "cold-protagonist", "male-protagonist", "female-protagonist",
@@ -67,13 +67,18 @@
         "virtual-reality", "dungeon", "regression",
         "kingdom-building", "academy", "time-travel"
       ],
-      "defaultValue": []
+      "defaultValue": ""
     }
   ],
   "endpoints": {
     "search": {
       "path": "/search",
       "isApi": false,
+      "pathOverrides": {
+        "Genre": "/genre/{Genre}",
+        "Tag": "/tag/{Tag}",
+        "Sort": "/sort/{Sort}"
+      },
       "params": {
         "keyword": "{query}",
         "page": "{page}"
