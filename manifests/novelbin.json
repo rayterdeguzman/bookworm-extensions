@@ -1,7 +1,7 @@
 {
   "id": "novelbin",
   "name": "NovelBin",
-  "version": 5,
+  "version": 6,
   "lang": "en",
   "baseUrl": "https://novelbin.com",
   "contentType": "text",
@@ -50,8 +50,8 @@
         "list": "#list-page .row",
         "id": "h3 a@href | regex:/\\/b\\/([^\\/]+)/",
         "title": "h3 a@title",
-        "coverUrl": "img@src",
-        "author": "span:nth-child(2)"
+        "coverUrl": "img@data-src",
+        "author": ".author"
       },
       "nextPageSelector": ".pagination li.active + li a"
     },
@@ -65,8 +65,8 @@
         "list": "#list-page .row",
         "id": "h3 a@href | regex:/\\/b\\/([^\\/]+)/",
         "title": "h3 a@title",
-        "coverUrl": "img@src",
-        "author": "span:nth-child(2)"
+        "coverUrl": "img@data-src",
+        "author": ".author"
       },
       "nextPageSelector": ".pagination li.active + li a"
     },
@@ -80,8 +80,8 @@
         "list": "#list-page .row",
         "id": "h3 a@href | regex:/\\/b\\/([^\\/]+)/",
         "title": "h3 a@title",
-        "coverUrl": "img@src",
-        "author": "span:nth-child(2)"
+        "coverUrl": "img@data-src",
+        "author": ".author"
       },
       "nextPageSelector": ".pagination li.active + li a"
     },
