@@ -1,7 +1,7 @@
 {
   "id": "novelbin",
   "name": "NovelBin",
-  "version": 9,
+  "version": 10,
   "lang": "en",
   "baseUrl": "https://novelbin.com",
   "contentType": "text",
@@ -16,6 +16,13 @@
     "Referer": "https://novelbin.com/"
   },
   "filters": [
+    {
+      "name": "Sort",
+      "type": "select",
+      "options": ["Popular", "Latest", "New", "Completed", "Ongoing"],
+      "values": ["top-view-novel", "latest", "new-novel", "completed", "ongoing"],
+      "defaultValue": "top-view-novel"
+    },
     {
       "name": "Genre",
       "type": "select",
@@ -34,6 +41,31 @@
         "romance", "school-life", "sci-fi", "seinen", "shoujo",
         "shounen", "slice-of-life", "smut", "sports", "supernatural",
         "tragedy", "wuxia", "xianxia", "xuanhuan"
+      ],
+      "defaultValue": ""
+    },
+    {
+      "name": "Tag",
+      "type": "select",
+      "options": [
+        "All", "Adapted to Anime", "Adapted to Manga", "Beautiful Female Lead",
+        "Calm Protagonist", "Clever Protagonist", "Early Romance",
+        "Evolution", "Game Elements", "Handsome Male Lead",
+        "Loli", "Cold Protagonist", "Male Protagonist", "Female Protagonist",
+        "Multiple Protagonists", "Overpowered Protagonist", "Weak to Strong",
+        "Transmigration", "Reincarnation", "System", "Cultivation",
+        "Harem", "Virtual Reality", "Dungeon", "Regression",
+        "Kingdom Building", "Academy", "Time Travel"
+      ],
+      "values": [
+        "", "adapted-to-anime", "adapted-to-manga", "beautiful-female-lead",
+        "calm-protagonist", "clever-protagonist", "early-romance",
+        "evolution", "game-elements", "handsome-male-lead",
+        "loli", "cold-protagonist", "male-protagonist", "female-protagonist",
+        "multiple-protagonists", "overpowered-protagonist", "weak-to-strong",
+        "transmigration", "reincarnation", "system", "cultivation",
+        "harem-tag", "virtual-reality", "dungeon", "regression",
+        "kingdom-building", "academy", "time-travel"
       ],
       "defaultValue": ""
     }
@@ -56,7 +88,7 @@
       "nextPageSelector": ".pagination li.active + li a"
     },
     "popular": {
-      "path": "/sort/top-view-novel",
+      "path": "/sort/{Sort}",
       "isApi": false,
       "params": {
         "page": "{page}"
