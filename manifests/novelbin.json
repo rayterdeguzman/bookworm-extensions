@@ -1,7 +1,7 @@
 {
   "id": "novelbin",
   "name": "NovelBin",
-  "version": 3,
+  "version": 4,
   "lang": "en",
   "baseUrl": "https://novelbin.com",
   "contentType": "text",
@@ -95,21 +95,18 @@
         "description": ".desc-text",
         "status": ".info .text-primary"
       },
-      "extractVars": {
-        "novelId": "#rating@data-novel-id"
-      }
     },
     "chapters": {
       "path": "/ajax/chapter-archive",
       "isApi": false,
       "useWebView": false,
       "params": {
-        "novelId": "{novelId}"
+        "novelId": "{seriesId}"
       },
       "selector": {
-        "list": "ul.list-chapter li",
-        "id": "a@href | regex:/([^\\/]+)\\/?$/",
-        "title": "a@title"
+        "list": ".panel-body a[href*='/b/']",
+        "id": "@href | regex:/([^\\/]+)\\/?$/",
+        "title": "@title"
       }
     },
     "content": {
