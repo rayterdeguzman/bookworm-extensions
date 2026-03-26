@@ -1,7 +1,7 @@
 {
   "id": "novelbin",
   "name": "NovelBin",
-  "version": 5,
+  "version": 6,
   "lang": "en",
   "baseUrl": "https://novelbin.com",
   "contentType": "text",
