@@ -1,0 +1,127 @@
+{
+  "id": "novelbin",
+  "name": "NovelBin",
+  "version": 1,
+  "lang": "en",
+  "baseUrl": "https://novelbin.com",
+  "contentType": "text",
+  "isApi": false,
+  "supportsLatest": true,
+  "useWebView": true,
+  "rateLimit": {
+    "requests": 1,
+    "perSeconds": 1
+  },
+  "headers": {
+    "Referer": "https://novelbin.com/"
+  },
+  "filters": [
+    {
+      "name": "Genre",
+      "type": "select",
+      "options": [
+        "All", "Action", "Adventure", "Comedy", "Drama", "Ecchi",
+        "Fantasy", "Harem", "Historical", "Horror", "Josei",
+        "Martial Arts", "Mature", "Mecha", "Mystery", "Psychological",
+        "Romance", "School Life", "Sci-fi", "Seinen", "Shoujo",
+        "Shounen", "Slice of Life", "Smut", "Sports", "Supernatural",
+        "Tragedy", "Wuxia", "Xianxia", "Xuanhuan"
+      ],
+      "values": [
+        "", "action", "adventure", "comedy", "drama", "ecchi",
+        "fantasy", "harem", "historical", "horror", "josei",
+        "martial-arts", "mature", "mecha", "mystery", "psychological",
+        "romance", "school-life", "sci-fi", "seinen", "shoujo",
+        "shounen", "slice-of-life", "smut", "sports", "supernatural",
+        "tragedy", "wuxia", "xianxia", "xuanhuan"
+      ],
+      "defaultValue": ""
+    }
+  ],
+  "endpoints": {
+    "search": {
+      "path": "/search",
+      "isApi": false,
+      "params": {
+        "keyword": "{query}",
+        "page": "{page}"
+      },
+      "selector": {
+        "list": "#list-page .row",
+        "id": "h3 a@href | regex:/\\/b\\/([^\\/]+)/",
+        "title": "h3 a@title",
+        "coverUrl": "img@src"
+      },
+      "nextPageSelector": ".pagination li.active + li a"
+    },
+    "popular": {
+      "path": "/sort/top-view-novel",
+      "isApi": false,
+      "params": {
+        "page": "{page}"
+      },
+      "selector": {
+        "list": "#list-page .row",
+        "id": "h3 a@href | regex:/\\/b\\/([^\\/]+)/",
+        "title": "h3 a@title",
+        "coverUrl": "img@src"
+      },
+      "nextPageSelector": ".pagination li.active + li a"
+    },
+    "latest": {
+      "path": "/sort/latest",
+      "isApi": false,
+      "params": {
+        "page": "{page}"
+      },
+      "selector": {
+        "list": "#list-page .row",
+        "id": "h3 a@href | regex:/\\/b\\/([^\\/]+)/",
+        "title": "h3 a@title",
+        "coverUrl": "img@src"
+      },
+      "nextPageSelector": ".pagination li.active + li a"
+    },
+    "details": {
+      "path": "/b/{seriesId}",
+      "isApi": false,
+      "selector": {
+        "title": "h3.title",
+        "coverUrl": ".book img@data-src",
+        "author": ".info a[href*='/a/']",
+        "description": ".desc-text",
+        "status": ".info .text-primary"
+      },
+      "extractVars": {
+        "novelId": "#rating@data-novel-id"
+      }
+    },
+    "chapters": {
+      "path": "/ajax/chapter-archive",
+      "isApi": false,
+      "params": {
+        "novelId": "{novelId}"
+      },
+      "selector": {
+        "list": "ul.list-chapter li",
+        "id": "a@href | regex:/([^\\/]+)\\/?$/",
+        "title": "a@title"
+      }
+    },
+    "content": {
+      "path": "/b/{seriesId}/{chapterSlug}",
+      "isApi": false,
+      "selector": {
+        "title": "h2 a.chr-title@title",
+        "content": "#chr-content"
+      },
+      "contentRemoveSelectors": [
+        "div",
+        "script",
+        "span#span",
+        ".adsbox",
+        ".ad-container"
+      ]
+    }
+  }
+}
