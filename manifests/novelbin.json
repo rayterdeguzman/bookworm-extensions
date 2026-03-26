@@ -1,7 +1,7 @@
 {
   "id": "novelbin",
   "name": "NovelBin",
-  "version": 8,
+  "version": 9,
   "lang": "en",
   "baseUrl": "https://novelbin.com",
   "contentType": "text",
@@ -94,7 +94,7 @@
         "author": ".info a[href*='/a/']",
         "description": ".desc-text",
         "status": ".info .text-primary",
-        "tags": ".info a[href*='/genre/']"
+        "tags": ".info a[href*='/genre/'], .info a[href*='/tag/']"
       }
     },
     "chapters": {
