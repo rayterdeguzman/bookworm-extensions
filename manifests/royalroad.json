@@ -1,7 +1,7 @@
 {
   "id": "royalroad",
   "name": "Royal Road",
-  "version": 1,
+  "version": 2,
   "lang": "en",
   "baseUrl": "https://www.royalroad.com",
   "contentType": "text",
@@ -212,12 +212,13 @@
     },
     "chapters": {
       "path": "/fiction/{seriesId}",
-      "isApi": false,
-      "selector": {
-        "list": "table#chapters tbody tr",
-        "id": "td:first-child a@href | regex:/chapter\\/(\\d+)/",
-        "title": "td:first-child a",
-        "dateUploaded": "td:nth-child(2) time@datetime"
+      "isApi": true,
+      "scriptVar": "window.chapters",
+      "mapping": {
+        "list": "$",
+        "id": "$.id",
+        "title": "$.title",
+        "dateUploaded": "$.date"
       }
     },
     "content": {
