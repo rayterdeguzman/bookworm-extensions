@@ -1,0 +1,242 @@
+{
+  "id": "royalroad",
+  "name": "Royal Road",
+  "version": 1,
+  "lang": "en",
+  "baseUrl": "https://www.royalroad.com",
+  "contentType": "text",
+  "isApi": false,
+  "supportsLatest": true,
+  "useWebView": true,
+  "rateLimit": {
+    "requests": 1,
+    "perSeconds": 1
+  },
+  "headers": {
+    "Referer": "https://www.royalroad.com/"
+  },
+  "nsfwExcludeTags": ["sexuality", "graphic_violence"],
+  "nsfwTagsParam": "tagsRemove",
+  "filters": [
+    {
+      "name": "Author",
+      "type": "text"
+    },
+    {
+      "name": "Genre",
+      "type": "multiSelect",
+      "options": [
+        "Action", "Adventure", "Comedy", "Contemporary", "Drama",
+        "Fantasy", "Historical", "Horror", "Mystery", "Psychological",
+        "Romance", "Satire", "Sci-fi", "Short Story", "Tragedy"
+      ],
+      "values": [
+        "action", "adventure", "comedy", "contemporary", "drama",
+        "fantasy", "historical", "horror", "mystery", "psychological",
+        "romance", "satire", "sci_fi", "one_shot", "tragedy"
+      ]
+    },
+    {
+      "name": "Tag",
+      "type": "multiSelect",
+      "options": [
+        "Anti-Hero Lead", "Artificial Intelligence", "Attractive Lead",
+        "Cyberpunk", "Dungeon", "Dystopia", "Female Lead", "First Contact",
+        "GameLit", "Gender Bender", "Genetically Engineered", "Grimdark",
+        "Hard Sci-fi", "Harem", "High Fantasy", "LitRPG", "Low Fantasy",
+        "Magic", "Male Lead", "Martial Arts", "Multiple Lead Characters",
+        "Mythos", "Non-Human Lead", "Portal Fantasy / Isekai",
+        "Post Apocalyptic", "Progression", "Reader Interactive",
+        "Reincarnation", "Ruling Class", "School Life", "Secret Identity",
+        "Slice of Life", "Soft Sci-fi", "Space Opera", "Sports",
+        "Steampunk", "Strategy", "Strong Lead", "Super Heroes",
+        "Supernatural", "Technologically Engineered", "Time Loop",
+        "Time Travel", "Urban Fantasy", "Villainous Lead",
+        "Virtual Reality", "War and Military", "Wuxia", "Xianxia"
+      ],
+      "values": [
+        "anti-hero_lead", "artificial_intelligence", "attractive_lead",
+        "cyberpunk", "dungeon", "dystopia", "female_lead", "first_contact",
+        "gamelit", "gender_bender", "genetically_engineered", "grimdark",
+        "hard_sci-fi", "harem", "high_fantasy", "litrpg", "low_fantasy",
+        "magic", "male_lead", "martial_arts", "multiple_lead",
+        "mythos", "non-human_lead", "summoned_hero",
+        "post_apocalyptic", "progression", "reader_interactive",
+        "reincarnation", "ruling_class", "school_life", "secret_identity",
+        "slice_of_life", "soft_sci-fi", "space_opera", "sports",
+        "steampunk", "strategy", "strong_lead", "super_heroes",
+        "supernatural", "technologically_engineered", "loop",
+        "time_travel", "urban_fantasy", "villainous_lead",
+        "virtual_reality", "war_and_military", "wuxia", "xianxia"
+      ]
+    },
+    {
+      "name": "Content Warning",
+      "type": "multiSelect",
+      "options": [
+        "Profanity", "Sexual Content", "Graphic Violence",
+        "Sensitive Content", "AI-Assisted", "AI-Generated"
+      ],
+      "values": [
+        "profanity", "sexuality", "graphic_violence",
+        "sensitive", "ai_assisted", "ai_generated"
+      ]
+    },
+    {
+      "name": "Status",
+      "type": "select",
+      "options": ["All", "Ongoing", "Completed", "Hiatus", "Dropped", "Stub"],
+      "values": ["ALL", "ONGOING", "COMPLETED", "HIATUS", "DROPPED", "STUB"],
+      "defaultValue": "ALL"
+    },
+    {
+      "name": "Type",
+      "type": "select",
+      "options": ["All", "Original", "Fan Fiction"],
+      "values": ["ALL", "original", "fanfiction"],
+      "defaultValue": "ALL"
+    },
+    {
+      "name": "Sort By",
+      "type": "select",
+      "options": [
+        "Relevance", "Popularity", "Average Rating", "Last Update",
+        "Release Date", "Followers", "Number of Pages", "Views",
+        "Title", "Author"
+      ],
+      "values": [
+        "relevance", "popularity", "rating", "last_update",
+        "release_date", "followers", "length", "views",
+        "title", "author"
+      ],
+      "defaultValue": "relevance"
+    },
+    {
+      "name": "Direction",
+      "type": "select",
+      "options": ["Descending", "Ascending"],
+      "values": ["desc", "asc"],
+      "defaultValue": "desc"
+    },
+    {
+      "name": "Min Pages",
+      "type": "text",
+      "defaultValue": "0"
+    },
+    {
+      "name": "Max Pages",
+      "type": "text",
+      "defaultValue": "20000"
+    },
+    {
+      "name": "Min Rating",
+      "type": "text",
+      "defaultValue": "0.0"
+    },
+    {
+      "name": "Max Rating",
+      "type": "text",
+      "defaultValue": "5.0"
+    }
+  ],
+  "endpoints": {
+    "search": {
+      "path": "/fictions/search",
+      "isApi": false,
+      "params": {
+        "page": "{page}",
+        "title": "{query}",
+        "author": "{Author}",
+        "tagsAdd": "{Genre|Tag|Content Warning}",
+        "status": "{Status}",
+        "type": "{Type}",
+        "orderBy": "{Sort By}",
+        "dir": "{Direction}",
+        "minPages": "{Min Pages}",
+        "maxPages": "{Max Pages}",
+        "minRating": "{Min Rating}",
+        "maxRating": "{Max Rating}",
+        "globalFilters": "true"
+      },
+      "selector": {
+        "list": "div.fiction-list-item",
+        "id": "figure a@href | regex:/\\/fiction\\/(\\d+)/",
+        "title": "figure img@alt",
+        "coverUrl": "figure img@src"
+      },
+      "nextPageSelector": "li.next:not(.disabled) a"
+    },
+    "popular": {
+      "path": "/fictions/search",
+      "isApi": false,
+      "params": {
+        "page": "{page}",
+        "orderBy": "popularity",
+        "dir": "desc"
+      },
+      "selector": {
+        "list": "div.fiction-list-item",
+        "id": "figure a@href | regex:/\\/fiction\\/(\\d+)/",
+        "title": "figure img@alt",
+        "coverUrl": "figure img@src"
+      },
+      "nextPageSelector": "li.next:not(.disabled) a"
+    },
+    "latest": {
+      "path": "/fictions/search",
+      "isApi": false,
+      "params": {
+        "page": "{page}",
+        "orderBy": "last_update",
+        "dir": "desc"
+      },
+      "selector": {
+        "list": "div.fiction-list-item",
+        "id": "figure a@href | regex:/\\/fiction\\/(\\d+)/",
+        "title": "figure img@alt",
+        "coverUrl": "figure img@src"
+      },
+      "nextPageSelector": "li.next:not(.disabled) a"
+    },
+    "details": {
+      "path": "/fiction/{seriesId}",
+      "isApi": false,
+      "selector": {
+        "title": "h1",
+        "coverUrl": "img.thumbnail@src",
+        "author": "h4 a[href*='/profile/']",
+        "description": "div.description div.hidden-content",
+        "status": "span.label-default.label-sm + span.label-default.label-sm",
+        "tags": "span.tags a.fiction-tag"
+      }
+    },
+    "chapters": {
+      "path": "/fiction/{seriesId}",
+      "isApi": false,
+      "selector": {
+        "list": "table#chapters tbody tr",
+        "id": "td:first-child a@href | regex:/chapter\\/(\\d+)/",
+        "title": "td:first-child a",
+        "dateUploaded": "td:nth-child(2) time@datetime"
+      }
+    },
+    "content": {
+      "path": "/fiction/{seriesId}/chapter/{chapterSlug}",
+      "isApi": false,
+      "selector": {
+        "title": "h1.font-white",
+        "content": "div.chapter-content"
+      },
+      "contentRemoveSelectors": [
+        "script",
+        "style",
+        "noscript",
+        ".ad",
+        ".ad-container",
+        ".portlet-body .row",
+        ".donation-area",
+        ".chrome-alert"
+      ]
+    }
+  }
+}
