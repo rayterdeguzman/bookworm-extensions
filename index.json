@@ -19,6 +19,13 @@
       "name": "Novel Bin",
       "version": 15,
       "lang": "en",
-      "contentType": "image"
+      "contentType": "text"
+    },
+    {
+      "id": "novelbin",
+      "name": "Novel Bin",
+      "version": 15,
+      "lang": "en",
+      "contentType": "text"
     }
   ]
