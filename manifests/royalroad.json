@@ -1,7 +1,7 @@
 {
   "id": "royalroad",
   "name": "Royal Road",
-  "version": 2,
+  "version": 3,
   "lang": "en",
   "baseUrl": "https://www.royalroad.com",
   "contentType": "text",
@@ -218,6 +218,7 @@
         "list": "$",
         "id": "$.id",
         "title": "$.title",
+        "chapterNumber": "$.order",
         "dateUploaded": "$.date"
       }
     },
