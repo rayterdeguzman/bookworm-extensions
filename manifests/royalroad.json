@@ -1,7 +1,7 @@
 {
   "id": "royalroad",
   "name": "Royal Road",
-  "version": 3,
+  "version": 4,
   "lang": "en",
   "baseUrl": "https://www.royalroad.com",
   "contentType": "text",
@@ -163,8 +163,7 @@
         "id": "figure a@href | regex:/\\/fiction\\/(\\d+)/",
         "title": "figure img@alt",
         "coverUrl": "figure img@src"
-      },
-      "nextPageSelector": "li.next:not(.disabled) a"
+      }
     },
     "popular": {
       "path": "/fictions/search",
@@ -179,8 +178,7 @@
         "id": "figure a@href | regex:/\\/fiction\\/(\\d+)/",
         "title": "figure img@alt",
         "coverUrl": "figure img@src"
-      },
-      "nextPageSelector": "li.next:not(.disabled) a"
+      }
     },
     "latest": {
       "path": "/fictions/search",
@@ -195,8 +193,7 @@
         "id": "figure a@href | regex:/\\/fiction\\/(\\d+)/",
         "title": "figure img@alt",
         "coverUrl": "figure img@src"
-      },
-      "nextPageSelector": "li.next:not(.disabled) a"
+      }
     },
     "details": {
       "path": "/fiction/{seriesId}",
