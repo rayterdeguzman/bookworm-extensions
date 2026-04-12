@@ -1,7 +1,7 @@
 {
   "id": "weebcentral",
   "name": "WeebCentral",
-  "version": 3,
+  "version": 4,
   "lang": "en",
   "baseUrl": "https://weebcentral.com",
   "contentType": "image",
@@ -170,7 +170,7 @@
       "selector": {
         "list": "div.flex.items-center",
         "id": "a[href*='/chapters/']@href | regex:/\\/chapters\\/([A-Z0-9]+)/",
-        "title": "span.flex > span",
+        "title": "span.grow > span:first-child",
         "dateUploaded": "time@datetime"
       }
     },
