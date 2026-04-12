@@ -1,7 +1,7 @@
 {
   "id": "toonily",
   "name": "Toonily",
-  "version": 12,
+  "version": 13,
   "lang": "en",
   "baseUrl": "https://toonily.com",
   "contentType": "image",
@@ -64,7 +64,7 @@
       "path": "/serie/",
       "isApi": false,
       "pathOverrides": {
-        "Genre": "/serie-genre/{Genre}/"
+        "Genre": "/genre/{Genre}/"
       },
       "params": {
         "s": "{query}",
@@ -86,7 +86,7 @@
       "path": "/serie/",
       "isApi": false,
       "pathOverrides": {
-        "Genre": "/serie-genre/{Genre}/"
+        "Genre": "/genre/{Genre}/"
       },
       "params": {
         "m_orderby": "views",
@@ -106,7 +106,7 @@
       "path": "/serie/",
       "isApi": false,
       "pathOverrides": {
-        "Genre": "/serie-genre/{Genre}/"
+        "Genre": "/genre/{Genre}/"
       },
       "params": {
         "m_orderby": "latest",
