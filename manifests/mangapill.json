@@ -1,7 +1,7 @@
 {
   "id": "mangapill",
   "name": "MangaPill",
-  "version": 1,
+  "version": 2,
   "lang": "en",
   "baseUrl": "https://mangapill.com",
   "contentType": "image",
@@ -60,16 +60,20 @@
       "path": "/",
       "selector": {
         "list": "div.my-3.grid.justify-end > div",
-        "id": "a@href | regex:/\\/manga\\/(.+)/",
+        "id": "a@href | regex:/\\/manga\\/(\\d+)/",
         "title": "div.font-black.leading-tight.line-clamp-2",
         "coverUrl": "img@data-src"
-      }
+      },
+      "nextPageSelector": "#__never"
     },
     "latest": {
       "path": "/mangas/new",
+      "params": {
+        "page": "{page}"
+      },
       "selector": {
         "list": "div.grid.grid-cols-2 > div",
-        "id": "a@href | regex:/\\/manga\\/(.+)/",
+        "id": "a@href | regex:/\\/manga\\/(\\d+)/",
         "title": "div.font-black.leading-tight.line-clamp-2",
         "coverUrl": "img@data-src"
       }
@@ -85,7 +89,7 @@
       },
       "selector": {
         "list": "div.my-3.grid > div",
-        "id": "a@href | regex:/\\/manga\\/(.+)/",
+        "id": "a@href | regex:/\\/manga\\/(\\d+)/",
         "title": "div.font-black.leading-tight.line-clamp-2",
         "coverUrl": "img@data-src"
       },
