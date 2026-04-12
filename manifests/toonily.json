@@ -1,7 +1,7 @@
 {
   "id": "toonily",
   "name": "Toonily",
-  "version": 8,
+  "version": 9,
   "lang": "en",
   "baseUrl": "https://toonily.com",
   "contentType": "image",
@@ -15,6 +15,8 @@
     "Referer": "https://toonily.com/",
     "Cookie": "toonily-mature=1"
   },
+  "nsfwExcludeTags": ["adult", "mature", "smut"],
+  "nsfwTagsParam": "genre[]",
   "filters": [
     {
       "name": "Order",
@@ -54,7 +56,7 @@
   ],
   "endpoints": {
     "search": {
-      "path": "/",
+      "path": "/serie/",
       "isApi": false,
       "params": {
         "s": "{query}",
@@ -64,12 +66,12 @@
         "status[]": "{Status}",
         "genre[]": "{Genre}"
       },
-      "waitForSelector": "div.c-tabs-item__content, div.page-item-detail, div.not-found",
+      "waitForSelector": "div.page-item-detail, div.c-tabs-item__content, div.not-found",
       "selector": {
-        "list": "div.c-tabs-item__content",
+        "list": "div.page-item-detail, div.c-tabs-item__content",
         "id": ".post-title a@href | regex:/\\/serie\\/([^\\/]+)/",
         "title": ".post-title a",
-        "coverUrl": ".tab-thumb img@data-src"
+        "coverUrl": ".item-thumb img@data-src, .tab-thumb img@data-src"
       },
       "nextPageSelector": "div.nav-previous a, a.nextpostslink, a.next.page-numbers"
     },
