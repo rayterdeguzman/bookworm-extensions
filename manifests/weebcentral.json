@@ -1,7 +1,7 @@
 {
   "id": "weebcentral",
   "name": "WeebCentral",
-  "version": 1,
+  "version": 2,
   "lang": "en",
   "baseUrl": "https://weebcentral.com",
   "contentType": "image",
@@ -176,6 +176,7 @@
     },
     "pages": {
       "path": "/chapters/{chapterSlug}/images",
+      "useWebView": false,
       "isApi": false,
       "params": {
         "reading_style": "long_strip"
