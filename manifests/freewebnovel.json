@@ -1,7 +1,7 @@
 {
   "id": "freewebnovel",
   "name": "FreeWebNovel",
-  "version": 2,
+  "version": 3,
   "lang": "en",
   "baseUrl": "https://freewebnovel.com",
   "contentType": "text",
@@ -19,9 +19,9 @@
     {
       "name": "Sort",
       "type": "select",
-      "options": ["Latest Release", "Latest Novels", "Completed"],
-      "values": ["latest-release", "latest-novel", "completed-novel"],
-      "defaultValue": "latest-release"
+      "options": ["Most Popular", "Latest Release", "Latest Novels", "Completed"],
+      "values": ["most-popular", "latest-release", "latest-novel", "completed-novel"],
+      "defaultValue": "most-popular"
     },
     {
       "name": "Genre",
@@ -63,10 +63,10 @@
         "searchkey": "{query}"
       },
       "selector": {
-        "list": "div.ul-list1 div.li-row",
+        "list": "div.li-row",
         "id": "h3.tit a@href | regex:/\\/novel\\/([^\\/]+)/",
         "title": "h3.tit a@title",
-        "coverUrl": "div.pic img@src"
+        "coverUrl": "div.pic img@data-src"
       }
     },
     "popular": {
@@ -76,20 +76,20 @@
         "Genre": "/genre/{Genre}/{page}"
       },
       "selector": {
-        "list": "div.ul-list1 div.li-row",
+        "list": "div.li-row",
         "id": "h3.tit a@href | regex:/\\/novel\\/([^\\/]+)/",
         "title": "h3.tit a@title",
-        "coverUrl": "div.pic img@src"
+        "coverUrl": "div.pic img@data-src"
       }
     },
     "latest": {
       "path": "/sort/latest-novel/{page}",
       "isApi": false,
       "selector": {
-        "list": "div.ul-list1 div.li-row",
+        "list": "div.li-row",
         "id": "h3.tit a@href | regex:/\\/novel\\/([^\\/]+)/",
         "title": "h3.tit a@title",
-        "coverUrl": "div.pic img@src"
+        "coverUrl": "div.pic img@data-src"
       }
     },
     "details": {
@@ -97,10 +97,10 @@
       "isApi": false,
       "selector": {
         "title": "div.m-desc h1.tit",
-        "coverUrl": "div.m-book1 div.pic img@src",
-        "author": "div.right a.a1",
-        "description": "div.inner",
-        "status": "[title=Status]",
+        "coverUrl": ".m-imgtxt img@data-src",
+        "author": ".m-imgtxt a[href*='/author/']",
+        "description": "div.m-desc div.txt",
+        "status": "a[href*='/sort/completed'], a[href*='/sort/ongoing']",
         "tags": "a[href*='/genre/']"
       }
     },
@@ -108,7 +108,7 @@
       "path": "/novel/{seriesId}",
       "isApi": false,
       "selector": {
-        "list": "div.m-newest2 ul.ul-list5 li",
+        "list": "#idData li",
         "id": "a@href | regex:/([^\\/]+)\\/?$/",
         "title": "a@title"
       }
@@ -121,14 +121,14 @@
         "content": "div.m-read .txt"
       },
       "contentRemoveSelectors": [
-        "div",
         "script",
         "style",
         "h4",
         "sub",
         ".notice-text",
         ".adsbox",
-        ".ad-container"
+        ".ad-container",
+        ".bg"
       ]
     }
   }
