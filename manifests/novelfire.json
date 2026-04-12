@@ -1,7 +1,7 @@
 {
   "id": "novelfire",
   "name": "NovelFire",
-  "version": 1,
+  "version": 3,
   "lang": "en",
   "baseUrl": "https://novelfire.net",
   "contentType": "text",
@@ -81,7 +81,10 @@
         "list": ".novel-list .novel-item",
         "id": "a@href | regex:/\\/book\\/([^\\/]+)/",
         "title": ".novel-title",
-        "coverUrl": "img@data-src"
+        "coverUrl": ".cover-wrap img@data-src",
+        "author": ".novel-stats .author",
+        "status": ".novel-stats .completed, .novel-stats .ongoing",
+        "chapters": ".novel-stats .chapter-count"
       },
       "nextPageSelector": "ul.pagination li.active + li a"
     },
@@ -96,7 +99,10 @@
         "list": ".novel-list .novel-item",
         "id": "a@href | regex:/\\/book\\/([^\\/]+)/",
         "title": ".novel-title",
-        "coverUrl": "img@data-src"
+        "coverUrl": ".cover-wrap img@data-src",
+        "author": ".novel-stats .author",
+        "status": ".novel-stats .completed, .novel-stats .ongoing",
+        "chapters": ".novel-stats .chapter-count"
       },
       "nextPageSelector": "ul.pagination li.active + li a"
     },
@@ -111,7 +117,10 @@
         "list": ".novel-list .novel-item",
         "id": "a@href | regex:/\\/book\\/([^\\/]+)/",
         "title": ".novel-title",
-        "coverUrl": "img@data-src"
+        "coverUrl": ".cover-wrap img@data-src",
+        "author": ".novel-stats .author",
+        "status": ".novel-stats .completed, .novel-stats .ongoing",
+        "chapters": ".novel-stats .chapter-count"
       },
       "nextPageSelector": "ul.pagination li.active + li a"
     },
@@ -120,7 +129,7 @@
       "isApi": false,
       "selector": {
         "title": ".novel-title",
-        "coverUrl": "figure.cover img@data-src",
+        "coverUrl": "article#novel figure.cover img@data-src",
         "author": "span[itemprop='author']",
         "description": ".summary .content",
         "status": ".header-stats .completed, .header-stats .ongoing",
@@ -128,15 +137,16 @@
       }
     },
     "chapters": {
-      "path": "/book/{seriesId}/chapters",
+      "path": "/book/{seriesId}/chapters?page={page}",
       "isApi": false,
       "waitForSelector": "ul.chapter-list",
+      "nextPageSelector": "ul.pagination li a[rel='next']",
       "selector": {
-        "list": "ul.chapter-list li",
-        "id": "a@href | regex:/([^\\/]+)\\/?$/",
-        "title": ".chapter-title"
-      },
-      "nextPageSelector": "ul.pagination li.active + li a"
+        "list": "ul.chapter-list li a",
+        "id": "@href | regex:/([^\\/]+)\\/?$/",
+        "title": ".chapter-title",
+        "dateUploaded": ".chapter-update"
+      }
     },
     "content": {
       "path": "/book/{seriesId}/{chapterSlug}",
