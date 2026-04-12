@@ -1,13 +1,13 @@
 {
   "id": "freewebnovel",
   "name": "FreeWebNovel",
-  "version": 3,
+  "version": 4,
   "lang": "en",
   "baseUrl": "https://freewebnovel.com",
   "contentType": "text",
   "isApi": false,
   "supportsLatest": true,
-  "useWebView": true,
+  "useWebView": false,
   "rateLimit": {
     "requests": 1,
     "perSeconds": 1
