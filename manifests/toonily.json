@@ -1,9 +1,9 @@
 {
   "id": "toonily",
   "name": "Toonily",
-  "version": 5,
+  "version": 7,
   "lang": "en",
-  "baseUrl": "https://toonily.me",
+  "baseUrl": "https://toonily.com",
   "contentType": "image",
   "supportsLatest": true,
   "useWebView": true,
@@ -12,128 +12,134 @@
     "perSeconds": 1
   },
   "headers": {
-    "Referer": "https://toonily.me/"
+    "Referer": "https://toonily.com/",
+    "Cookie": "toonily-mature=1"
   },
   "filters": [
     {
       "name": "Order",
       "type": "select",
-      "options": ["Views", "Updated", "Created", "Name A-Z", "Rating"],
-      "values": ["views", "updated_at", "created_at", "name", "rating"],
-      "defaultValue": "views"
+      "options": ["Trending", "Most Views", "New", "Latest", "A-Z", "Rating"],
+      "values": ["trending", "views", "new-manga", "latest", "alphabet", "rating"],
+      "defaultValue": "trending"
     },
     {
       "name": "Status",
       "type": "select",
-      "options": ["All", "Ongoing", "Completed"],
-      "values": ["all", "ongoing", "completed"],
-      "defaultValue": "all"
+      "options": ["All", "Ongoing", "Completed", "On Hold", "Canceled"],
+      "values": ["", "on-going", "end", "on-hold", "canceled"],
+      "defaultValue": ""
     },
     {
       "name": "Genre",
       "type": "multiSelect",
       "options": [
-        "Action", "Adult", "Adventure", "Comedy", "Drama", "Ecchi",
-        "Fantasy", "Gender Bender", "Harem", "Historical", "Horror",
-        "Josei", "Martial Arts", "Mature", "Mecha", "Mystery",
-        "Psychological", "Romance", "School Life", "Sci-fi", "Seinen",
-        "Shoujo", "Shounen", "Slice of Life", "Smut", "Sports",
-        "Supernatural", "Tragedy", "Yaoi", "Yuri"
+        "Action", "Adult", "Adventure", "BL", "Comedy", "Drama", "Ecchi",
+        "Fantasy", "GL", "Harem", "Historical", "Horror", "Josei",
+        "Martial Arts", "Mature", "Mystery", "Psychological", "Romance",
+        "School Life", "Sci-fi", "Seinen", "Shoujo", "Shounen",
+        "Slice of Life", "Smut", "Sports", "Supernatural", "Thriller",
+        "Tragedy", "Yaoi", "Yuri"
       ],
       "values": [
-        "action", "adult", "adventure", "comedy", "drama", "ecchi",
-        "fantasy", "gender-bender", "harem", "historical", "horror",
-        "josei", "martial-arts", "mature", "mecha", "mystery",
-        "psychological", "romance", "school-life", "sci-fi", "seinen",
-        "shoujo", "shounen", "slice-of-life", "smut", "sports",
-        "supernatural", "tragedy", "yaoi", "yuri"
+        "action", "adult", "adventure", "bl", "comedy", "drama", "ecchi",
+        "fantasy", "gl", "harem", "historical", "horror", "josei",
+        "martial-arts", "mature", "mystery", "psychological", "romance",
+        "school-life", "sci-fi", "seinen", "shoujo", "shounen",
+        "slice-of-life", "smut", "sports", "supernatural", "thriller",
+        "tragedy", "yaoi", "yuri"
       ],
       "defaultValue": []
     }
   ],
   "endpoints": {
     "search": {
-      "path": "/search",
+      "path": "/page/{page}/",
       "isApi": false,
       "params": {
-        "q": "{query}",
-        "sort": "{Order}",
-        "status": "{Status}",
-        "genre[]": "{Genre}",
-        "page": "{page}"
+        "s": "{query}",
+        "post_type": "wp-manga",
+        "m_orderby": "{Order}",
+        "status[]": "{Status}",
+        "genre[]": "{Genre}"
       },
-      "waitForSelector": ".book-detailed-item",
+      "waitForSelector": "div.c-tabs-item__content, div.page-item-detail, div.not-found",
       "selector": {
-        "list": ".book-detailed-item",
-        "id": ".meta .title h3 a@href | regex:/\\/([^\\/]+)\\/?$/",
-        "title": ".meta .title h3 a",
-        "coverUrl": ".thumb img@data-src"
+        "list": "div.c-tabs-item__content",
+        "id": ".post-title a@href | regex:/\\/serie\\/([^\\/]+)/",
+        "title": ".post-title a",
+        "coverUrl": ".tab-thumb img@data-src"
       },
-      "nextPageSelector": ".paginator > a.active + a:not([rel=next])"
+      "nextPageSelector": "div.nav-previous a, a.nextpostslink, a.next.page-numbers"
     },
     "popular": {
-      "path": "/search",
+      "path": "/serie/page/{page}/",
       "isApi": false,
       "params": {
-        "sort": "views",
-        "page": "{page}"
+        "m_orderby": "views",
+        "status[]": "{Status}",
+        "genre[]": "{Genre}"
       },
-      "waitForSelector": ".book-detailed-item",
+      "waitForSelector": "div.page-item-detail, div.not-found",
       "selector": {
-        "list": ".book-detailed-item",
-        "id": ".meta .title h3 a@href | regex:/\\/([^\\/]+)\\/?$/",
-        "title": ".meta .title h3 a",
-        "coverUrl": ".thumb img@data-src"
+        "list": "div.page-item-detail",
+        "id": ".post-title a@href | regex:/\\/serie\\/([^\\/]+)/",
+        "title": ".post-title a",
+        "coverUrl": ".item-thumb img@data-src"
       },
-      "nextPageSelector": ".paginator > a.active + a:not([rel=next])"
+      "nextPageSelector": "div.nav-previous a, a.nextpostslink, a.next.page-numbers"
     },
     "latest": {
-      "path": "/search",
+      "path": "/serie/page/{page}/",
       "isApi": false,
       "params": {
-        "sort": "updated_at",
-        "page": "{page}"
+        "m_orderby": "latest",
+        "status[]": "{Status}",
+        "genre[]": "{Genre}"
       },
-      "waitForSelector": ".book-detailed-item",
+      "waitForSelector": "div.page-item-detail, div.not-found",
       "selector": {
-        "list": ".book-detailed-item",
-        "id": ".meta .title h3 a@href | regex:/\\/([^\\/]+)\\/?$/",
-        "title": ".meta .title h3 a",
-        "coverUrl": ".thumb img@data-src"
+        "list": "div.page-item-detail",
+        "id": ".post-title a@href | regex:/\\/serie\\/([^\\/]+)/",
+        "title": ".post-title a",
+        "coverUrl": ".item-thumb img@data-src"
       },
-      "nextPageSelector": ".paginator > a.active + a:not([rel=next])"
+      "nextPageSelector": "div.nav-previous a, a.nextpostslink, a.next.page-numbers"
     },
     "details": {
-      "path": "/{seriesId}",
+      "path": "/serie/{seriesId}/",
       "isApi": false,
-      "waitForSelector": ".detail h1",
+      "waitForSelector": "div.post-title h1, div.summary_image",
+      "extractVars": {
+        "postId": "[id^='manga-chapters-holder']@data-id"
+      },
       "selector": {
-        "title": ".detail h1",
-        "coverUrl": "#cover img@data-src",
-        "description": ".summary .content",
-        "author": ".detail .meta > p:nth-child(1) a",
-        "status": ".detail .meta > p:nth-child(2) a",
-        "tags": ".detail .meta > p:nth-child(3) a"
+        "title": "div.post-title h1",
+        "coverUrl": "div.summary_image img@data-src",
+        "description": "div.description-summary div.summary__content@html",
+        "author": "div.author-content > a",
+        "status": "div.post-status .post-content_item:last-child .summary-content",
+        "tags": "div.genres-content a"
       }
     },
     "chapters": {
-      "path": "/{seriesId}/chapters",
+      "path": "/serie/{seriesId}/ajax/chapters/",
+      "method": "POST",
       "isApi": false,
-      "params": {
-        "source": "detail"
-      },
+      "useWebView": false,
       "selector": {
-        "list": "li",
-        "id": "a@href | regex:/\\/[^\\/]+\\/([^\\/]+)\\/?$/",
-        "title": "strong"
+        "list": "li.wp-manga-chapter",
+        "id": "a@href | regex:/\\/serie\\/[^\\/]+\\/([^\\/]+)\\/?$/",
+        "title": "a",
+        "dateUploaded": "span.chapter-release-date"
       }
     },
     "pages": {
-      "path": "/{seriesId}/{chapterSlug}",
+      "path": "/serie/{seriesId}/{chapterSlug}/",
       "isApi": false,
-      "waitForSelector": ".chapter-image img",
+      "waitForSelector": "div.page-break img, .reading-content img",
       "selector": {
-        "pages": ".chapter-image img, #chapter-images img",
+        "pages": "div.page-break img, .reading-content img.wp-manga-chapter-img",
         "src": "data-src",
         "title": "h1#chapter-heading"
       }
