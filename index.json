@@ -66,14 +66,14 @@
     {
       "id": "novelfire",
       "name": "Novel Fire",
-      "version": 4,
+      "version": 5,
       "lang": "en",
       "contentType": "text"
     },
     {
       "id": "scribblehub",
       "name": "Scribble Hub",
-      "version": 4,
+      "version": 5,
       "lang": "en",
       "contentType": "text"
     }
