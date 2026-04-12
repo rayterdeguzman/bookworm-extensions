@@ -1,7 +1,7 @@
 {
   "id": "scribblehub",
   "name": "ScribbleHub",
-  "version": 3,
+  "version": 4,
   "lang": "en",
   "baseUrl": "https://www.scribblehub.com",
   "contentType": "text",
@@ -78,16 +78,15 @@
       "path": "/",
       "isApi": false,
       "pathOverrides": {
-        "Genre": "/series-finder/",
-        "Content Warning": "/series-finder/",
-        "Status": "/series-finder/",
-        "Sort By": "/series-finder/",
-        "Direction": "/series-finder/"
+        "Genre": "/series-finder/?sf=1",
+        "Content Warning": "/series-finder/?sf=1",
+        "Status": "/series-finder/?sf=1",
+        "Sort By": "/series-finder/?sf=1",
+        "Direction": "/series-finder/?sf=1"
       },
       "params": {
         "s": "{query}",
         "post_type": "fictionposts",
-        "sf": "1",
         "sort": "{Sort By}",
         "order": "{Direction}",
         "gi": "{Genre}",
@@ -157,17 +156,21 @@
       },
       "selector": {
         "list": ".toc_w",
-        "id": "a@href | regex:/\\.com\\/(.+?)\\/?$/",
+        "id": "a@href | regex:/\\/chapter\\/(\\d+)/",
         "title": ".toc_a",
         "dateUploaded": ".fic_date_pub@title"
       }
     },
     "content": {
-      "path": "/{chapterSlug}",
+      "path": "/",
       "isApi": false,
+      "params": {
+        "p": "{chapterSlug}"
+      },
+      "waitForSelector": "#chp_raw",
       "selector": {
         "title": ".chapter-title",
-        "content": "div.chp_raw"
+        "content": "#chp_raw"
       },
       "contentRemoveSelectors": [
         "script",
