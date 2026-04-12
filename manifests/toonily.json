@@ -1,7 +1,7 @@
 {
   "id": "toonily",
   "name": "Toonily",
-  "version": 9,
+  "version": 10,
   "lang": "en",
   "baseUrl": "https://toonily.com",
   "contentType": "image",
@@ -12,12 +12,17 @@
     "perSeconds": 1
   },
   "headers": {
-    "Referer": "https://toonily.com/",
-    "Cookie": "toonily-mature=1"
+    "Referer": "https://toonily.com/"
   },
-  "nsfwExcludeTags": ["adult", "mature", "smut"],
-  "nsfwTagsParam": "genre[]",
+  "cookies": {
+    "toonily-mature": "{Show Adult}"
+  },
   "filters": [
+    {
+      "name": "Show Adult",
+      "type": "checkbox",
+      "defaultValue": "0"
+    },
     {
       "name": "Order",
       "type": "select",
