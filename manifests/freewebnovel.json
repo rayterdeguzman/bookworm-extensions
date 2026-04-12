@@ -1,7 +1,7 @@
 {
   "id": "freewebnovel",
   "name": "FreeWebNovel",
-  "version": 5,
+  "version": 6,
   "lang": "en",
   "baseUrl": "https://freewebnovel.com",
   "contentType": "text",
@@ -70,11 +70,9 @@
       }
     },
     "popular": {
-      "path": "/sort/{Sort}/{page}",
+      "path": "/sort/most-popular",
       "isApi": false,
-      "pathOverrides": {
-        "Genre": "/genre/{Genre}/{page}"
-      },
+      "nextPageSelector": "#__never",
       "selector": {
         "list": "div.li-row",
         "id": "h3.tit a@href | regex:/\\/novel\\/([^\\/]+)/",
