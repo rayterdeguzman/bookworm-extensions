@@ -1,7 +1,7 @@
 {
   "id": "novelfire",
   "name": "NovelFire",
-  "version": 4,
+  "version": 5,
   "lang": "en",
   "baseUrl": "https://novelfire.net",
   "contentType": "text",
@@ -139,10 +139,10 @@
     "chapters": {
       "path": "/book/{seriesId}/chapters",
       "isApi": false,
+      "useWebView": false,
       "params": {
         "page": "{page}"
       },
-      "waitForSelector": "ul.chapter-list",
       "nextPageSelector": "ul.pagination li a[rel='next']",
       "selector": {
         "list": "ul.chapter-list li a",
