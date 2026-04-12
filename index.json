@@ -24,28 +24,28 @@
     {
       "id": "manhuaus",
       "name": "Manhua Us",
-      "version": 1,
+      "version": 2,
       "lang": "en",
       "contentType": "image"
     },
     {
       "id": "mangapill",
       "name": "Manga Pill",
-      "version": 1,
+      "version": 2,
       "lang": "en",
       "contentType": "image"
     },
     {
       "id": "dynastyscans",
       "name": "Dynasty Scans",
-      "version": 1,
+      "version": 2,
       "lang": "en",
       "contentType": "image"
     },
     {
       "id": "weebcentral",
       "name": "Weeb Central",
-      "version": 1,
+      "version": 2,
       "lang": "en",
       "contentType": "image"
     },
@@ -66,21 +66,21 @@
     {
       "id": "freewebnovel",
       "name": "Free Web Novel",
-      "version": 1,
+      "version": 2,
       "lang": "en",
       "contentType": "text"
     },
     {
       "id": "novelfire",
       "name": "Novel Fire",
-      "version": 1,
+      "version": 3,
       "lang": "en",
       "contentType": "text"
     },
     {
       "id": "scribblehub",
       "name": "Scribble Hub",
-      "version": 1,
+      "version": 3,
       "lang": "en",
       "contentType": "text"
     }
