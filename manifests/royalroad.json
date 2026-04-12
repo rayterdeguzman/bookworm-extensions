@@ -1,7 +1,7 @@
 {
   "id": "royalroad",
   "name": "Royal Road",
-  "version": 4,
+  "version": 5,
   "lang": "en",
   "baseUrl": "https://www.royalroad.com",
   "contentType": "text",
@@ -161,8 +161,16 @@
       "selector": {
         "list": "div.fiction-list-item",
         "id": "figure a@href | regex:/\\/fiction\\/(\\d+)/",
-        "title": "figure img@alt",
-        "coverUrl": "figure img@src"
+        "title": "h2.fiction-title a",
+        "coverUrl": "figure img@src",
+        "tags": "a.fiction-tag",
+        "description": "div[id^='description-']",
+        "rating": "span.star@title",
+        "followers": "div.row.stats > div:nth-child(1) span | regex:/([\\d,]+)/",
+        "pages": "div.row.stats > div:nth-child(3) span | regex:/([\\d,]+)/",
+        "views": "div.row.stats > div:nth-child(4) span | regex:/([\\d,]+)/",
+        "chapters": "div.row.stats > div:nth-child(5) span | regex:/([\\d,]+)/",
+        "updatedDate": "div.row.stats time@datetime"
       }
     },
     "popular": {
@@ -176,8 +184,16 @@
       "selector": {
         "list": "div.fiction-list-item",
         "id": "figure a@href | regex:/\\/fiction\\/(\\d+)/",
-        "title": "figure img@alt",
-        "coverUrl": "figure img@src"
+        "title": "h2.fiction-title a",
+        "coverUrl": "figure img@src",
+        "tags": "a.fiction-tag",
+        "description": "div[id^='description-']",
+        "rating": "span.star@title",
+        "followers": "div.row.stats > div:nth-child(1) span | regex:/([\\d,]+)/",
+        "pages": "div.row.stats > div:nth-child(3) span | regex:/([\\d,]+)/",
+        "views": "div.row.stats > div:nth-child(4) span | regex:/([\\d,]+)/",
+        "chapters": "div.row.stats > div:nth-child(5) span | regex:/([\\d,]+)/",
+        "updatedDate": "div.row.stats time@datetime"
       }
     },
     "latest": {
@@ -191,8 +207,16 @@
       "selector": {
         "list": "div.fiction-list-item",
         "id": "figure a@href | regex:/\\/fiction\\/(\\d+)/",
-        "title": "figure img@alt",
-        "coverUrl": "figure img@src"
+        "title": "h2.fiction-title a",
+        "coverUrl": "figure img@src",
+        "tags": "a.fiction-tag",
+        "description": "div[id^='description-']",
+        "rating": "span.star@title",
+        "followers": "div.row.stats > div:nth-child(1) span | regex:/([\\d,]+)/",
+        "pages": "div.row.stats > div:nth-child(3) span | regex:/([\\d,]+)/",
+        "views": "div.row.stats > div:nth-child(4) span | regex:/([\\d,]+)/",
+        "chapters": "div.row.stats > div:nth-child(5) span | regex:/([\\d,]+)/",
+        "updatedDate": "div.row.stats time@datetime"
       }
     },
     "details": {
