@@ -1,7 +1,7 @@
 {
   "id": "novelfire",
   "name": "NovelFire",
-  "version": 3,
+  "version": 4,
   "lang": "en",
   "baseUrl": "https://novelfire.net",
   "contentType": "text",
@@ -81,7 +81,7 @@
         "list": ".novel-list .novel-item",
         "id": "a@href | regex:/\\/book\\/([^\\/]+)/",
         "title": ".novel-title",
-        "coverUrl": ".cover-wrap img@data-src",
+        "coverUrl": ".cover-wrap img@src",
         "author": ".novel-stats .author",
         "status": ".novel-stats .completed, .novel-stats .ongoing",
         "chapters": ".novel-stats .chapter-count"
@@ -99,7 +99,7 @@
         "list": ".novel-list .novel-item",
         "id": "a@href | regex:/\\/book\\/([^\\/]+)/",
         "title": ".novel-title",
-        "coverUrl": ".cover-wrap img@data-src",
+        "coverUrl": ".cover-wrap img@src",
         "author": ".novel-stats .author",
         "status": ".novel-stats .completed, .novel-stats .ongoing",
         "chapters": ".novel-stats .chapter-count"
@@ -117,7 +117,7 @@
         "list": ".novel-list .novel-item",
         "id": "a@href | regex:/\\/book\\/([^\\/]+)/",
         "title": ".novel-title",
-        "coverUrl": ".cover-wrap img@data-src",
+        "coverUrl": ".cover-wrap img@src",
         "author": ".novel-stats .author",
         "status": ".novel-stats .completed, .novel-stats .ongoing",
         "chapters": ".novel-stats .chapter-count"
@@ -129,7 +129,7 @@
       "isApi": false,
       "selector": {
         "title": ".novel-title",
-        "coverUrl": "article#novel figure.cover img@data-src",
+        "coverUrl": "article#novel figure.cover img@src",
         "author": "span[itemprop='author']",
         "description": ".summary .content",
         "status": ".header-stats .completed, .header-stats .ongoing",
@@ -137,8 +137,11 @@
       }
     },
     "chapters": {
-      "path": "/book/{seriesId}/chapters?page={page}",
+      "path": "/book/{seriesId}/chapters",
       "isApi": false,
+      "params": {
+        "page": "{page}"
+      },
       "waitForSelector": "ul.chapter-list",
       "nextPageSelector": "ul.pagination li a[rel='next']",
       "selector": {
