@@ -1,7 +1,7 @@
 {
   "id": "manhuaus",
   "name": "Manhuaus",
-  "version": 1,
+  "version": 2,
   "lang": "en",
   "baseUrl": "https://manhuaus.com",
   "contentType": "image",
@@ -59,6 +59,7 @@
         "s": "{query}",
         "post_type": "wp-manga",
         "m_orderby": "{Order}",
+        "status[]": "{Status}",
         "wp-manga-genre[]": "{Genre}"
       },
       "selector": {
@@ -105,7 +106,7 @@
         "coverUrl": "div.summary_image img@data-src",
         "description": "div.description-summary div.summary__content",
         "author": "div.author-content > a",
-        "status": "div.summary-heading:contains(Status) + div.summary-content",
+        "status": "div.post-status .post-content_item:last-child .summary-content",
         "tags": "div.genres-content a"
       }
     },
