@@ -1,7 +1,7 @@
 {
   "id": "toonily",
   "name": "Toonily",
-  "version": 13,
+  "version": 15,
   "lang": "en",
   "baseUrl": "https://toonily.com",
   "contentType": "image",
@@ -28,7 +28,7 @@
       "type": "select",
       "options": ["Trending", "Most Views", "New", "Latest", "A-Z", "Rating"],
       "values": ["trending", "views", "new-manga", "latest", "alphabet", "rating"],
-      "defaultValue": "trending"
+      "defaultValue": ""
     },
     {
       "name": "Status",
@@ -41,20 +41,20 @@
       "name": "Genre",
       "type": "select",
       "options": [
-        "All", "Action", "Adult", "Adventure", "BL", "Comedy", "Drama", "Ecchi",
-        "Fantasy", "GL", "Harem", "Historical", "Horror", "Josei",
-        "Martial Arts", "Mature", "Mystery", "Psychological", "Romance",
+        "All", "Action", "Adventure", "Comedy", "Crime", "Drama",
+        "Fantasy", "Gossip", "Historical", "Horror", "Isekai", "Josei",
+        "Magic", "Mature", "Mystery", "Psychological", "Romance",
         "School Life", "Sci-fi", "Seinen", "Shoujo", "Shounen",
-        "Slice of Life", "Smut", "Sports", "Supernatural", "Thriller",
-        "Tragedy", "Yaoi", "Yuri"
+        "Slice of Life", "Sports", "Supernatural", "Thriller",
+        "Tragedy", "Villainess", "Wuxia", "Yaoi", "Yuri"
       ],
       "values": [
-        "", "action", "adult", "adventure", "bl", "comedy", "drama", "ecchi",
-        "fantasy", "gl", "harem", "historical", "horror", "josei",
-        "martial-arts", "mature", "mystery", "psychological", "romance",
-        "school-life", "sci-fi", "seinen", "shoujo", "shounen",
-        "slice-of-life", "smut", "sports", "supernatural", "thriller",
-        "tragedy", "yaoi", "yuri"
+        "", "action", "adventure", "comedy", "crime", "drama",
+        "fantasy", "gossip", "historical", "horror", "isekai", "josei",
+        "magic", "mature", "mystery", "psychological", "romance",
+        "school-life", "scifi-webtoon", "seinen", "shoujo", "shounen",
+        "slice-of-life", "sports", "supernatural", "thriller",
+        "tragedy", "villainess", "wuxia", "yaoi", "yuri"
       ],
       "defaultValue": ""
     }
@@ -68,7 +68,6 @@
       },
       "params": {
         "s": "{query}",
-        "post_type": "wp-manga",
         "paged": "{page}",
         "m_orderby": "{Order}",
         "status[]": "{Status}"
