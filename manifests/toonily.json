@@ -1,7 +1,7 @@
 {
   "id": "toonily",
   "name": "Toonily",
-  "version": 7,
+  "version": 8,
   "lang": "en",
   "baseUrl": "https://toonily.com",
   "contentType": "image",
@@ -54,11 +54,12 @@
   ],
   "endpoints": {
     "search": {
-      "path": "/page/{page}/",
+      "path": "/",
       "isApi": false,
       "params": {
         "s": "{query}",
         "post_type": "wp-manga",
+        "paged": "{page}",
         "m_orderby": "{Order}",
         "status[]": "{Status}",
         "genre[]": "{Genre}"
@@ -73,10 +74,11 @@
       "nextPageSelector": "div.nav-previous a, a.nextpostslink, a.next.page-numbers"
     },
     "popular": {
-      "path": "/serie/page/{page}/",
+      "path": "/serie/",
       "isApi": false,
       "params": {
         "m_orderby": "views",
+        "paged": "{page}",
         "status[]": "{Status}",
         "genre[]": "{Genre}"
       },
@@ -90,10 +92,11 @@
       "nextPageSelector": "div.nav-previous a, a.nextpostslink, a.next.page-numbers"
     },
     "latest": {
-      "path": "/serie/page/{page}/",
+      "path": "/serie/",
       "isApi": false,
       "params": {
         "m_orderby": "latest",
+        "paged": "{page}",
         "status[]": "{Status}",
         "genre[]": "{Genre}"
       },
