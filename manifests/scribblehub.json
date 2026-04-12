@@ -1,7 +1,7 @@
 {
   "id": "scribblehub",
   "name": "ScribbleHub",
-  "version": 1,
+  "version": 3,
   "lang": "en",
   "baseUrl": "https://www.scribblehub.com",
   "contentType": "text",
@@ -50,8 +50,7 @@
       "name": "Status",
       "type": "select",
       "options": ["All", "Completed", "Ongoing", "Hiatus"],
-      "values": ["all", "completed", "ongoing", "hiatus"],
-      "defaultValue": "all"
+      "values": ["all", "completed", "ongoing", "hiatus"]
     },
     {
       "name": "Sort By",
@@ -65,25 +64,38 @@
         "ratings", "chapters", "frequency", "dateadded",
         "favorites", "lastchdate", "numofrate", "pages",
         "pageviews", "readers", "reviews", "totalwords"
-      ],
-      "defaultValue": "ratings"
+      ]
     },
     {
       "name": "Direction",
       "type": "select",
       "options": ["Descending", "Ascending"],
-      "values": ["desc", "asc"],
-      "defaultValue": "desc"
+      "values": ["desc", "asc"]
     }
   ],
   "endpoints": {
     "search": {
       "path": "/",
       "isApi": false,
+      "pathOverrides": {
+        "Genre": "/series-finder/",
+        "Content Warning": "/series-finder/",
+        "Status": "/series-finder/",
+        "Sort By": "/series-finder/",
+        "Direction": "/series-finder/"
+      },
       "params": {
         "s": "{query}",
-        "post_type": "fictionposts"
+        "post_type": "fictionposts",
+        "sf": "1",
+        "sort": "{Sort By}",
+        "order": "{Direction}",
+        "gi": "{Genre}",
+        "cti": "{Content Warning}",
+        "cp": "{Status}",
+        "pg": "{page}"
       },
+      "listSeparator": ",",
       "selector": {
         "list": ".search_main_box",
         "id": ".search_title > a@href | regex:/series\\/(\\d+)/",
@@ -94,13 +106,11 @@
     "popular": {
       "path": "/series-finder/",
       "isApi": false,
+      "listSeparator": ",",
       "params": {
         "sf": "1",
-        "sort": "{Sort By}",
-        "order": "{Direction}",
-        "gi": "{Genre}",
-        "cti": "{Content Warning}",
-        "cp": "{Status}",
+        "sort": "ratings",
+        "order": "desc",
         "pg": "{page}"
       },
       "selector": {
@@ -136,9 +146,15 @@
       }
     },
     "chapters": {
-      "path": "/series/{seriesId}/x/",
+      "path": "/wp-admin/admin-ajax.php",
+      "method": "POST",
       "isApi": false,
-      "waitForSelector": ".toc_w",
+      "useWebView": false,
+      "params": {
+        "action": "wi_getreleases_pagination",
+        "pagenum": "-1",
+        "mypostid": "{seriesId}"
+      },
       "selector": {
         "list": ".toc_w",
         "id": "a@href | regex:/\\.com\\/(.+?)\\/?$/",
