@@ -1,7 +1,7 @@
 {
   "id": "toonily",
   "name": "Toonily",
-  "version": 4,
+  "version": 5,
   "lang": "en",
   "baseUrl": "https://toonily.me",
   "contentType": "image",
@@ -65,7 +65,7 @@
       "waitForSelector": ".book-detailed-item",
       "selector": {
         "list": ".book-detailed-item",
-        "id": ".thumb a@href | regex:/\\/([^\\/]+)\\/?$/",
+        "id": ".meta .title h3 a@href | regex:/\\/([^\\/]+)\\/?$/",
         "title": ".meta .title h3 a",
         "coverUrl": ".thumb img@data-src"
       },
@@ -81,7 +81,7 @@
       "waitForSelector": ".book-detailed-item",
       "selector": {
         "list": ".book-detailed-item",
-        "id": ".thumb a@href | regex:/\\/([^\\/]+)\\/?$/",
+        "id": ".meta .title h3 a@href | regex:/\\/([^\\/]+)\\/?$/",
         "title": ".meta .title h3 a",
         "coverUrl": ".thumb img@data-src"
       },
@@ -97,7 +97,7 @@
       "waitForSelector": ".book-detailed-item",
       "selector": {
         "list": ".book-detailed-item",
-        "id": ".thumb a@href | regex:/\\/([^\\/]+)\\/?$/",
+        "id": ".meta .title h3 a@href | regex:/\\/([^\\/]+)\\/?$/",
         "title": ".meta .title h3 a",
         "coverUrl": ".thumb img@data-src"
       },
