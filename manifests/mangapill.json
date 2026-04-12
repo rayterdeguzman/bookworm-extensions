@@ -1,0 +1,121 @@
+{
+  "id": "mangapill",
+  "name": "MangaPill",
+  "version": 1,
+  "lang": "en",
+  "baseUrl": "https://mangapill.com",
+  "contentType": "image",
+  "supportsLatest": true,
+  "useWebView": false,
+  "rateLimit": {
+    "requests": 2,
+    "perSeconds": 1
+  },
+  "headers": {
+    "Referer": "https://mangapill.com/"
+  },
+  "filters": [
+    {
+      "name": "Type",
+      "type": "select",
+      "options": ["All", "Manga", "Novel", "One-Shot", "Doujinshi", "Manhua", "OEL"],
+      "values": ["", "manga", "novel", "one-shot", "doujinshi", "manhua", "oel"],
+      "defaultValue": ""
+    },
+    {
+      "name": "Status",
+      "type": "select",
+      "options": ["All", "Publishing", "Finished", "On Hiatus", "Discontinued", "Not Yet Published"],
+      "values": ["", "publishing", "finished", "on hiatus", "discontinued", "not yet published"],
+      "defaultValue": ""
+    },
+    {
+      "name": "Genre",
+      "type": "multiSelect",
+      "options": [
+        "Action", "Adventure", "Cars", "Comedy", "Dementia", "Demons",
+        "Doujinshi", "Drama", "Ecchi", "Fantasy", "Game", "Gender Bender",
+        "Harem", "Historical", "Horror", "Isekai", "Josei", "Kids",
+        "Magic", "Martial Arts", "Mecha", "Military", "Music", "Mystery",
+        "Parody", "Police", "Psychological", "Romance", "Samurai", "School",
+        "Sci-Fi", "Seinen", "Shoujo", "Shoujo Ai", "Shounen", "Shounen Ai",
+        "Slice of Life", "Space", "Sports", "Super Power", "Supernatural",
+        "Thriller", "Tragedy", "Vampire", "Yaoi", "Yuri"
+      ],
+      "values": [
+        "Action", "Adventure", "Cars", "Comedy", "Dementia", "Demons",
+        "Doujinshi", "Drama", "Ecchi", "Fantasy", "Game", "Gender Bender",
+        "Harem", "Historical", "Horror", "Isekai", "Josei", "Kids",
+        "Magic", "Martial Arts", "Mecha", "Military", "Music", "Mystery",
+        "Parody", "Police", "Psychological", "Romance", "Samurai", "School",
+        "Sci-Fi", "Seinen", "Shoujo", "Shoujo Ai", "Shounen", "Shounen Ai",
+        "Slice of Life", "Space", "Sports", "Super Power", "Supernatural",
+        "Thriller", "Tragedy", "Vampire", "Yaoi", "Yuri"
+      ],
+      "defaultValue": []
+    }
+  ],
+  "endpoints": {
+    "popular": {
+      "path": "/",
+      "selector": {
+        "list": "div.my-3.grid.justify-end > div",
+        "id": "a@href | regex:/\\/manga\\/(.+)/",
+        "title": "div.font-black.leading-tight.line-clamp-2",
+        "coverUrl": "img@data-src"
+      }
+    },
+    "latest": {
+      "path": "/mangas/new",
+      "selector": {
+        "list": "div.grid.grid-cols-2 > div",
+        "id": "a@href | regex:/\\/manga\\/(.+)/",
+        "title": "div.font-black.leading-tight.line-clamp-2",
+        "coverUrl": "img@data-src"
+      }
+    },
+    "search": {
+      "path": "/search",
+      "params": {
+        "q": "{query}",
+        "type": "{Type}",
+        "status": "{Status}",
+        "genre": "{Genre}",
+        "page": "{page}"
+      },
+      "selector": {
+        "list": "div.my-3.grid > div",
+        "id": "a@href | regex:/\\/manga\\/(.+)/",
+        "title": "div.font-black.leading-tight.line-clamp-2",
+        "coverUrl": "img@data-src"
+      },
+      "nextPageSelector": "a.btn.btn-sm"
+    },
+    "details": {
+      "path": "/manga/{seriesId}",
+      "selector": {
+        "title": "h1.font-bold",
+        "coverUrl": "div.flex-shrink-0 img@data-src",
+        "description": "p.text-sm.text--secondary",
+        "status": "div.grid.grid-cols-1.gap-3 > div:nth-child(2) > div",
+        "tags": "a.text-brand"
+      }
+    },
+    "chapters": {
+      "path": "/manga/{seriesId}",
+      "selector": {
+        "list": "div#chapters div[data-filter-list] a",
+        "id": "@href | regex:/\\/chapters\\/(.+)/",
+        "title": "@text"
+      }
+    },
+    "pages": {
+      "path": "/chapters/{seriesId}/{chapterSlug}",
+      "selector": {
+        "pages": "chapter-page img.js-page",
+        "src": "data-src",
+        "title": "h1"
+      }
+    }
+  }
+}

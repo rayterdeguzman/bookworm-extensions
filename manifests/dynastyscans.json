@@ -1,0 +1,111 @@
+{
+  "id": "dynastyscans",
+  "name": "Dynasty Scans",
+  "version": 1,
+  "lang": "en",
+  "baseUrl": "https://dynasty-scans.com",
+  "contentType": "image",
+  "isApi": false,
+  "supportsLatest": true,
+  "useWebView": false,
+  "rateLimit": {
+    "requests": 3,
+    "perSeconds": 1
+  },
+  "headers": {
+    "Referer": "https://dynasty-scans.com/"
+  },
+  "filters": [
+    {
+      "name": "Sort",
+      "type": "select",
+      "options": ["Alphabetical", "Date Added", "Release Date"],
+      "values": ["name", "created_at", "released_on"],
+      "defaultValue": "name"
+    }
+  ],
+  "endpoints": {
+    "search": {
+      "path": "/search",
+      "isApi": false,
+      "params": {
+        "q": "{query}",
+        "classes[]": "Series",
+        "sort": "{Sort}",
+        "page": "{page}"
+      },
+      "selector": {
+        "list": "dl.chapter-list dd",
+        "id": "a.name@href | regex:/\\/series\\/([^\\/]+)/",
+        "title": "a.name",
+        "coverUrl": ""
+      },
+      "nextPageSelector": ".pagination a[rel=next]"
+    },
+    "popular": {
+      "path": "/search",
+      "isApi": false,
+      "params": {
+        "classes[]": "Series",
+        "sort": "name",
+        "page": "{page}"
+      },
+      "selector": {
+        "list": "dl.chapter-list dd",
+        "id": "a.name@href | regex:/\\/series\\/([^\\/]+)/",
+        "title": "a.name",
+        "coverUrl": ""
+      },
+      "nextPageSelector": ".pagination a[rel=next]"
+    },
+    "latest": {
+      "path": "/search",
+      "isApi": false,
+      "params": {
+        "classes[]": "Series",
+        "sort": "created_at",
+        "page": "{page}"
+      },
+      "selector": {
+        "list": "dl.chapter-list dd",
+        "id": "a.name@href | regex:/\\/series\\/([^\\/]+)/",
+        "title": "a.name",
+        "coverUrl": ""
+      },
+      "nextPageSelector": ".pagination a[rel=next]"
+    },
+    "details": {
+      "path": "/series/{seriesId}.json",
+      "isApi": true,
+      "mapping": {
+        "id": "$.permalink",
+        "title": "$.name",
+        "coverUrl": "https://dynasty-scans.com{$.cover}",
+        "description": "$.description",
+        "author": "$.tags[?(@.type=='Author')].name",
+        "status": "$.tags[?(@.type=='Status')].name",
+        "tags": "$.tags[?(@.type=='General')]",
+        "tagFormat": "{$.name}"
+      }
+    },
+    "chapters": {
+      "path": "/series/{seriesId}.json",
+      "isApi": true,
+      "mapping": {
+        "list": "$.taggings[*]",
+        "id": "$.permalink",
+        "title": "$.title",
+        "dateUploaded": "$.released_on"
+      }
+    },
+    "pages": {
+      "path": "/chapters/{chapterSlug}.json",
+      "isApi": true,
+      "mapping": {
+        "pages": "$.pages[*].url",
+        "pageUrl": "{baseUrl}{page}",
+        "title": "$.long_title"
+      }
+    }
+  }
+}

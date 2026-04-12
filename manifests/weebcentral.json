@@ -1,0 +1,189 @@
+{
+  "id": "weebcentral",
+  "name": "WeebCentral",
+  "version": 1,
+  "lang": "en",
+  "baseUrl": "https://weebcentral.com",
+  "contentType": "image",
+  "isApi": false,
+  "supportsLatest": true,
+  "useWebView": true,
+  "rateLimit": {
+    "requests": 1,
+    "perSeconds": 1
+  },
+  "headers": {
+    "Referer": "https://weebcentral.com/"
+  },
+  "filters": [
+    {
+      "name": "Sort",
+      "type": "select",
+      "options": [
+        "Best Match", "Alphabet", "Popularity",
+        "Subscribers", "Recently Added", "Latest Updates"
+      ],
+      "values": [
+        "Best Match", "Alphabet", "Popularity",
+        "Subscribers", "Recently Added", "Latest Updates"
+      ],
+      "defaultValue": "Best Match"
+    },
+    {
+      "name": "Order",
+      "type": "select",
+      "options": ["Ascending", "Descending"],
+      "values": ["Ascending", "Descending"],
+      "defaultValue": "Descending"
+    },
+    {
+      "name": "Official Translation",
+      "type": "select",
+      "options": ["Any", "Yes", "No"],
+      "values": ["Any", "True", "False"],
+      "defaultValue": "Any"
+    },
+    {
+      "name": "Anime Adaptation",
+      "type": "select",
+      "options": ["Any", "Yes", "No"],
+      "values": ["Any", "True", "False"],
+      "defaultValue": "Any"
+    },
+    {
+      "name": "Adult Content",
+      "type": "select",
+      "options": ["Any", "Yes", "No"],
+      "values": ["Any", "True", "False"],
+      "defaultValue": "Any"
+    },
+    {
+      "name": "Status",
+      "type": "multiSelect",
+      "options": ["Ongoing", "Complete", "Hiatus", "Canceled"],
+      "values": ["Ongoing", "Complete", "Hiatus", "Canceled"]
+    },
+    {
+      "name": "Type",
+      "type": "multiSelect",
+      "options": ["Manga", "Manhwa", "Manhua", "OEL"],
+      "values": ["Manga", "Manhwa", "Manhua", "OEL"]
+    },
+    {
+      "name": "Tag",
+      "type": "multiSelect",
+      "options": [
+        "Action", "Adult", "Adventure", "Comedy", "Doujinshi", "Drama",
+        "Ecchi", "Fantasy", "Gender Bender", "Harem", "Hentai",
+        "Historical", "Horror", "Isekai", "Josei", "Lolicon",
+        "Martial Arts", "Mature", "Mecha", "Mystery", "Psychological",
+        "Romance", "School Life", "Sci-fi", "Seinen", "Shotacon",
+        "Shoujo", "Shoujo Ai", "Shounen", "Shounen Ai", "Slice of Life",
+        "Smut", "Sports", "Supernatural", "Tragedy", "Yaoi", "Yuri",
+        "Other"
+      ],
+      "values": [
+        "Action", "Adult", "Adventure", "Comedy", "Doujinshi", "Drama",
+        "Ecchi", "Fantasy", "Gender Bender", "Harem", "Hentai",
+        "Historical", "Horror", "Isekai", "Josei", "Lolicon",
+        "Martial Arts", "Mature", "Mecha", "Mystery", "Psychological",
+        "Romance", "School Life", "Sci-fi", "Seinen", "Shotacon",
+        "Shoujo", "Shoujo Ai", "Shounen", "Shounen Ai", "Slice of Life",
+        "Smut", "Sports", "Supernatural", "Tragedy", "Yaoi", "Yuri",
+        "Other"
+      ]
+    }
+  ],
+  "endpoints": {
+    "search": {
+      "path": "/search/data",
+      "isApi": false,
+      "params": {
+        "text": "{query}",
+        "sort": "{Sort}",
+        "order": "{Order}",
+        "official": "{Official Translation}",
+        "anime": "{Anime Adaptation}",
+        "adult": "{Adult Content}",
+        "included_tag": "{Tag}",
+        "included_status": "{Status}",
+        "included_type": "{Type}",
+        "display_mode": "Full Display"
+      },
+      "selector": {
+        "list": "article.bg-base-300",
+        "id": "a[href*='/series/']@href | regex:/\\/series\\/([A-Z0-9]+)/",
+        "title": ".line-clamp-1",
+        "coverUrl": "img[src*='compsci88']@src"
+      },
+      "nextPageSelector": "#__never"
+    },
+    "popular": {
+      "path": "/search/data",
+      "isApi": false,
+      "params": {
+        "sort": "Popularity",
+        "order": "Descending",
+        "official": "Any",
+        "display_mode": "Full Display"
+      },
+      "selector": {
+        "list": "article.bg-base-300",
+        "id": "a[href*='/series/']@href | regex:/\\/series\\/([A-Z0-9]+)/",
+        "title": ".line-clamp-1",
+        "coverUrl": "img[src*='compsci88']@src"
+      },
+      "nextPageSelector": "#__never"
+    },
+    "latest": {
+      "path": "/search/data",
+      "isApi": false,
+      "params": {
+        "sort": "Latest Updates",
+        "order": "Descending",
+        "official": "Any",
+        "display_mode": "Full Display"
+      },
+      "selector": {
+        "list": "article.bg-base-300",
+        "id": "a[href*='/series/']@href | regex:/\\/series\\/([A-Z0-9]+)/",
+        "title": ".line-clamp-1",
+        "coverUrl": "img[src*='compsci88']@src"
+      },
+      "nextPageSelector": "#__never"
+    },
+    "details": {
+      "path": "/series/{seriesId}",
+      "isApi": false,
+      "selector": {
+        "title": "h1",
+        "coverUrl": "picture img@src",
+        "author": "a[href*='search?author=']",
+        "description": "p.whitespace-pre-wrap",
+        "status": "a[href*='included_status=']",
+        "tags": "a[href*='included_tag=']"
+      }
+    },
+    "chapters": {
+      "path": "/series/{seriesId}/full-chapter-list",
+      "isApi": false,
+      "selector": {
+        "list": "div.flex.items-center",
+        "id": "a[href*='/chapters/']@href | regex:/\\/chapters\\/([A-Z0-9]+)/",
+        "title": "span.grow span",
+        "dateUploaded": "time@datetime"
+      }
+    },
+    "pages": {
+      "path": "/chapters/{chapterSlug}/images",
+      "isApi": false,
+      "params": {
+        "reading_style": "long_strip"
+      },
+      "selector": {
+        "pages": "img[src*='://']",
+        "src": "src"
+      }
+    }
+  }
+}

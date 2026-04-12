@@ -1,0 +1,173 @@
+{
+  "id": "scribblehub",
+  "name": "ScribbleHub",
+  "version": 1,
+  "lang": "en",
+  "baseUrl": "https://www.scribblehub.com",
+  "contentType": "text",
+  "isApi": false,
+  "supportsLatest": true,
+  "useWebView": true,
+  "rateLimit": {
+    "requests": 1,
+    "perSeconds": 2
+  },
+  "headers": {
+    "Referer": "https://www.scribblehub.com/"
+  },
+  "nsfwExcludeTags": ["902", "20", "915", "904"],
+  "nsfwTagsParam": "ge",
+  "filters": [
+    {
+      "name": "Genre",
+      "type": "multiSelect",
+      "options": [
+        "Action", "Adult", "Adventure", "Boys Love", "Comedy",
+        "Drama", "Ecchi", "Fanfiction", "Fantasy", "Gender Bender",
+        "Girls Love", "Harem", "Historical", "Horror", "Isekai",
+        "Josei", "LitRPG", "Martial Arts", "Mature", "Mecha",
+        "Mystery", "Psychological", "Romance", "School Life", "Sci-fi",
+        "Seinen", "Slice of Life", "Smut", "Sports", "Supernatural",
+        "Tragedy"
+      ],
+      "values": [
+        "9", "902", "8", "891", "7",
+        "903", "904", "38", "19", "905",
+        "892", "1015", "21", "22", "37",
+        "906", "1180", "907", "20", "908",
+        "909", "910", "6", "911", "912",
+        "913", "914", "915", "916", "5",
+        "901"
+      ]
+    },
+    {
+      "name": "Content Warning",
+      "type": "multiSelect",
+      "options": ["Gore", "Sexual Content", "Strong Language"],
+      "values": ["48", "50", "49"]
+    },
+    {
+      "name": "Status",
+      "type": "select",
+      "options": ["All", "Completed", "Ongoing", "Hiatus"],
+      "values": ["all", "completed", "ongoing", "hiatus"],
+      "defaultValue": "all"
+    },
+    {
+      "name": "Sort By",
+      "type": "select",
+      "options": [
+        "Ratings", "Chapters", "Chapters per Week", "Date Added",
+        "Favorites", "Last Updated", "Number of Ratings", "Pages",
+        "Pageviews", "Readers", "Reviews", "Total Words"
+      ],
+      "values": [
+        "ratings", "chapters", "frequency", "dateadded",
+        "favorites", "lastchdate", "numofrate", "pages",
+        "pageviews", "readers", "reviews", "totalwords"
+      ],
+      "defaultValue": "ratings"
+    },
+    {
+      "name": "Direction",
+      "type": "select",
+      "options": ["Descending", "Ascending"],
+      "values": ["desc", "asc"],
+      "defaultValue": "desc"
+    }
+  ],
+  "endpoints": {
+    "search": {
+      "path": "/",
+      "isApi": false,
+      "params": {
+        "s": "{query}",
+        "post_type": "fictionposts"
+      },
+      "selector": {
+        "list": ".search_main_box",
+        "id": ".search_title > a@href | regex:/series\\/(\\d+)/",
+        "title": ".search_title > a",
+        "coverUrl": ".search_img > img@src"
+      }
+    },
+    "popular": {
+      "path": "/series-finder/",
+      "isApi": false,
+      "params": {
+        "sf": "1",
+        "sort": "{Sort By}",
+        "order": "{Direction}",
+        "gi": "{Genre}",
+        "cti": "{Content Warning}",
+        "cp": "{Status}",
+        "pg": "{page}"
+      },
+      "selector": {
+        "list": ".search_main_box",
+        "id": ".search_title > a@href | regex:/series\\/(\\d+)/",
+        "title": ".search_title > a",
+        "coverUrl": ".search_img > img@src"
+      }
+    },
+    "latest": {
+      "path": "/latest-series/",
+      "isApi": false,
+      "params": {
+        "pg": "{page}"
+      },
+      "selector": {
+        "list": ".search_main_box",
+        "id": ".search_title > a@href | regex:/series\\/(\\d+)/",
+        "title": ".search_title > a",
+        "coverUrl": ".search_img > img@src"
+      }
+    },
+    "details": {
+      "path": "/series/{seriesId}/x/",
+      "isApi": false,
+      "selector": {
+        "title": ".fic_title",
+        "coverUrl": ".fic_image > img@src",
+        "author": ".auth_name_fic",
+        "description": ".wi_fic_desc",
+        "status": "span.rnd_stats + span",
+        "tags": "a.fic_genre"
+      }
+    },
+    "chapters": {
+      "path": "/series/{seriesId}/x/",
+      "isApi": false,
+      "waitForSelector": ".toc_w",
+      "selector": {
+        "list": ".toc_w",
+        "id": "a@href | regex:/\\.com\\/(.+?)\\/?$/",
+        "title": ".toc_a",
+        "dateUploaded": ".fic_date_pub@title"
+      }
+    },
+    "content": {
+      "path": "/{chapterSlug}",
+      "isApi": false,
+      "selector": {
+        "title": ".chapter-title",
+        "content": "div.chp_raw"
+      },
+      "contentRemoveSelectors": [
+        "script",
+        "style",
+        "noscript",
+        "iframe",
+        ".ad",
+        ".adsbygoogle",
+        ".ads-holder",
+        ".code-block",
+        ".wi_authornotes",
+        ".wi_news",
+        "div[id^='ezoic']",
+        "div[class*='ezoic']",
+        "ins.adsbygoogle"
+      ]
+    }
+  }
+}

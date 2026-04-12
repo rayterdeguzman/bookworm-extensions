@@ -1,0 +1,135 @@
+{
+  "id": "freewebnovel",
+  "name": "FreeWebNovel",
+  "version": 1,
+  "lang": "en",
+  "baseUrl": "https://freewebnovel.com",
+  "contentType": "text",
+  "isApi": false,
+  "supportsLatest": true,
+  "useWebView": true,
+  "rateLimit": {
+    "requests": 1,
+    "perSeconds": 1
+  },
+  "headers": {
+    "Referer": "https://freewebnovel.com/"
+  },
+  "filters": [
+    {
+      "name": "Sort",
+      "type": "select",
+      "options": ["Most Popular", "Latest Novels", "Latest Release", "Completed"],
+      "values": ["most-popular", "latest-novel", "latest-release", "completed-novel"],
+      "defaultValue": "most-popular"
+    },
+    {
+      "name": "Genre",
+      "type": "select",
+      "options": [
+        "All",
+        "Action", "Adult", "Adventure", "Comedy", "Drama",
+        "Eastern", "Ecchi", "Fantasy", "Game", "Gender Bender",
+        "Harem", "Historical", "Horror", "Josei",
+        "Martial Arts", "Mature", "Mecha", "Mystery",
+        "Psychological", "Reincarnation", "Romance", "School Life",
+        "Sci-fi", "Seinen", "Shoujo", "Shounen", "Shounen Ai",
+        "Slice of Life", "Smut", "Sports", "Supernatural",
+        "Tragedy", "Wuxia", "Xianxia", "Xuanhuan", "Yaoi"
+      ],
+      "values": [
+        "",
+        "Action", "Adult", "Adventure", "Comedy", "Drama",
+        "Eastern", "Ecchi", "Fantasy", "Game", "Gender+Bender",
+        "Harem", "Historical", "Horror", "Josei",
+        "Martial+Arts", "Mature", "Mecha", "Mystery",
+        "Psychological", "Reincarnation", "Romance", "School+Life",
+        "Sci-fi", "Seinen", "Shoujo", "Shounen", "Shounen+Ai",
+        "Slice+of+Life", "Smut", "Sports", "Supernatural",
+        "Tragedy", "Wuxia", "Xianxia", "Xuanhuan", "Yaoi"
+      ],
+      "defaultValue": ""
+    }
+  ],
+  "endpoints": {
+    "search": {
+      "path": "/search/",
+      "isApi": false,
+      "pathOverrides": {
+        "Genre": "/genre/{Genre}/{page}",
+        "Sort": "/sort/{Sort}/{page}"
+      },
+      "params": {
+        "searchkey": "{query}"
+      },
+      "selector": {
+        "list": "div.ul-list1 div.li-row",
+        "id": "h3.tit a@href | regex:/\\/novel\\/([^\\/]+)/",
+        "title": "h3.tit a@title",
+        "coverUrl": "div.pic img@src"
+      }
+    },
+    "popular": {
+      "path": "/sort/{Sort}/{page}",
+      "isApi": false,
+      "pathOverrides": {
+        "Genre": "/genre/{Genre}/{page}"
+      },
+      "selector": {
+        "list": "div.ul-list1 div.li-row",
+        "id": "h3.tit a@href | regex:/\\/novel\\/([^\\/]+)/",
+        "title": "h3.tit a@title",
+        "coverUrl": "div.pic img@src"
+      }
+    },
+    "latest": {
+      "path": "/sort/latest-novel/{page}",
+      "isApi": false,
+      "selector": {
+        "list": "div.ul-list1 div.li-row",
+        "id": "h3.tit a@href | regex:/\\/novel\\/([^\\/]+)/",
+        "title": "h3.tit a@title",
+        "coverUrl": "div.pic img@src"
+      }
+    },
+    "details": {
+      "path": "/novel/{seriesId}",
+      "isApi": false,
+      "selector": {
+        "title": "div.m-desc h1.tit",
+        "coverUrl": "div.m-book1 div.pic img@src",
+        "author": "div.right a.a1",
+        "description": "div.inner",
+        "status": "[title=Status]",
+        "tags": "a[href*='/genre/']"
+      }
+    },
+    "chapters": {
+      "path": "/novel/{seriesId}",
+      "isApi": false,
+      "selector": {
+        "list": "div.m-newest2 ul.ul-list5 li",
+        "id": "a@href | regex:/([^\\/]+)\\/?$/",
+        "title": "a@title"
+      }
+    },
+    "content": {
+      "path": "/novel/{seriesId}/{chapterSlug}",
+      "isApi": false,
+      "selector": {
+        "title": "span.chapter",
+        "content": "div.m-read .txt"
+      },
+      "contentRemoveSelectors": [
+        "div",
+        "script",
+        "style",
+        "h4",
+        "sub",
+        ".notice-text",
+        ".adsbox",
+        ".ad-container"
+      ]
+    }
+  }
+}

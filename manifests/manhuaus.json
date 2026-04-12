@@ -1,0 +1,132 @@
+{
+  "id": "manhuaus",
+  "name": "Manhuaus",
+  "version": 1,
+  "lang": "en",
+  "baseUrl": "https://manhuaus.com",
+  "contentType": "image",
+  "supportsLatest": true,
+  "useWebView": true,
+  "rateLimit": {
+    "requests": 2,
+    "perSeconds": 1
+  },
+  "headers": {
+    "Referer": "https://manhuaus.com/"
+  },
+  "filters": [
+    {
+      "name": "Order",
+      "type": "select",
+      "options": ["Trending", "Most Views", "New", "Latest", "A-Z", "Z-A", "Rating"],
+      "values": ["trending", "views", "new-manga", "latest", "alphabet", "alphabetrev", "rating"],
+      "defaultValue": "trending"
+    },
+    {
+      "name": "Status",
+      "type": "select",
+      "options": ["All", "Ongoing", "Completed", "On Hold", "Canceled"],
+      "values": ["", "on-going", "end", "on-hold", "canceled"],
+      "defaultValue": ""
+    },
+    {
+      "name": "Genre",
+      "type": "multiSelect",
+      "options": [
+        "Action", "Adult", "Adventure", "Comedy", "Drama", "Ecchi",
+        "Fantasy", "Gender Bender", "Harem", "Historical", "Horror",
+        "Josei", "Martial Arts", "Mature", "Mecha", "Mystery",
+        "Psychological", "Romance", "School Life", "Sci-fi", "Seinen",
+        "Shoujo", "Shounen", "Slice of Life", "Smut", "Sports",
+        "Supernatural", "Tragedy", "Yaoi", "Yuri"
+      ],
+      "values": [
+        "action", "adult", "adventure", "comedy", "drama", "ecchi",
+        "fantasy", "gender-bender", "harem", "historical", "horror",
+        "josei", "martial-arts", "mature", "mecha", "mystery",
+        "psychological", "romance", "school-life", "sci-fi", "seinen",
+        "shoujo", "shounen", "slice-of-life", "smut", "sports",
+        "supernatural", "tragedy", "yaoi", "yuri"
+      ],
+      "defaultValue": []
+    }
+  ],
+  "endpoints": {
+    "search": {
+      "path": "/",
+      "isApi": false,
+      "params": {
+        "s": "{query}",
+        "post_type": "wp-manga",
+        "m_orderby": "{Order}",
+        "wp-manga-genre[]": "{Genre}"
+      },
+      "selector": {
+        "list": "div.c-tabs-item__content",
+        "id": ".post-title a@href | regex:/\\/manga\\/([^\\/]+)/",
+        "title": ".post-title a",
+        "coverUrl": ".tab-thumb img@data-src"
+      },
+      "nextPageSelector": "div.nav-previous a, a.nextpostslink"
+    },
+    "popular": {
+      "path": "/manga/",
+      "isApi": false,
+      "params": {
+        "m_orderby": "views"
+      },
+      "selector": {
+        "list": "div.page-item-detail",
+        "id": ".post-title a@href | regex:/\\/manga\\/([^\\/]+)/",
+        "title": ".post-title a",
+        "coverUrl": ".item-thumb img@data-src"
+      },
+      "nextPageSelector": "div.nav-previous a, a.nextpostslink"
+    },
+    "latest": {
+      "path": "/manga/",
+      "isApi": false,
+      "params": {
+        "m_orderby": "latest"
+      },
+      "selector": {
+        "list": "div.page-item-detail",
+        "id": ".post-title a@href | regex:/\\/manga\\/([^\\/]+)/",
+        "title": ".post-title a",
+        "coverUrl": ".item-thumb img@data-src"
+      },
+      "nextPageSelector": "div.nav-previous a, a.nextpostslink"
+    },
+    "details": {
+      "path": "/manga/{seriesId}/",
+      "isApi": false,
+      "selector": {
+        "title": "div.post-title h1, div.post-title h3",
+        "coverUrl": "div.summary_image img@data-src",
+        "description": "div.description-summary div.summary__content",
+        "author": "div.author-content > a",
+        "status": "div.summary-heading:contains(Status) + div.summary-content",
+        "tags": "div.genres-content a"
+      }
+    },
+    "chapters": {
+      "path": "/manga/{seriesId}/",
+      "isApi": false,
+      "selector": {
+        "list": "li.wp-manga-chapter",
+        "id": "a@href | regex:/\\/manga\\/[^\\/]+\\/([^\\/]+)\\/?$/",
+        "title": "a",
+        "dateUploaded": "span.chapter-release-date"
+      }
+    },
+    "pages": {
+      "path": "/manga/{seriesId}/{chapterSlug}/",
+      "isApi": false,
+      "selector": {
+        "pages": "div.page-break img, .reading-content img.wp-manga-chapter-img",
+        "src": "data-src",
+        "title": "h1#chapter-heading"
+      }
+    }
+  }
+}
