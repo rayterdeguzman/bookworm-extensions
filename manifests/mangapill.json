@@ -1,12 +1,12 @@
 {
   "id": "mangapill",
   "name": "MangaPill",
-  "version": 2,
+  "version": 3,
   "lang": "en",
   "baseUrl": "https://mangapill.com",
   "contentType": "image",
   "supportsLatest": true,
-  "useWebView": false,
+  "useWebView": true,
   "rateLimit": {
     "requests": 2,
     "perSeconds": 1
@@ -57,29 +57,36 @@
   ],
   "endpoints": {
     "popular": {
-      "path": "/",
+      "path": "/search",
+      "useWebView": false,
+      "params": {
+        "type": "manga",
+        "page": "{page}"
+      },
       "selector": {
-        "list": "div.my-3.grid.justify-end > div",
+        "list": ".grid > div:not([class])",
         "id": "a@href | regex:/\\/manga\\/(\\d+)/",
-        "title": "div.font-black.leading-tight.line-clamp-2",
+        "title": "div[class] > a",
         "coverUrl": "img@data-src"
       },
-      "nextPageSelector": "#__never"
+      "nextPageSelector": "a.btn.btn-sm"
     },
     "latest": {
       "path": "/mangas/new",
+      "useWebView": false,
       "params": {
         "page": "{page}"
       },
       "selector": {
-        "list": "div.grid.grid-cols-2 > div",
+        "list": ".grid > div:not([class])",
         "id": "a@href | regex:/\\/manga\\/(\\d+)/",
-        "title": "div.font-black.leading-tight.line-clamp-2",
+        "title": "a:not(:first-child) > div",
         "coverUrl": "img@data-src"
       }
     },
     "search": {
       "path": "/search",
+      "useWebView": false,
       "params": {
         "q": "{query}",
         "type": "{Type}",
@@ -88,35 +95,38 @@
         "page": "{page}"
       },
       "selector": {
-        "list": "div.my-3.grid > div",
+        "list": ".grid > div:not([class])",
         "id": "a@href | regex:/\\/manga\\/(\\d+)/",
-        "title": "div.font-black.leading-tight.line-clamp-2",
+        "title": "div[class] > a",
         "coverUrl": "img@data-src"
       },
       "nextPageSelector": "a.btn.btn-sm"
     },
     "details": {
       "path": "/manga/{seriesId}",
+      "useWebView": false,
       "selector": {
-        "title": "h1.font-bold",
-        "coverUrl": "div.flex-shrink-0 img@data-src",
-        "description": "p.text-sm.text--secondary",
-        "status": "div.grid.grid-cols-1.gap-3 > div:nth-child(2) > div",
-        "tags": "a.text-brand"
+        "title": "h1",
+        "coverUrl": "div.container > div:first-child > div:first-child > img@data-src",
+        "description": "div.container > div:first-child > div:last-child > div:nth-child(2) > p",
+        "status": "div.container > div:first-child > div:last-child > div:nth-child(3) > div:nth-child(2) > div",
+        "tags": "a[href*=genre]"
       }
     },
     "chapters": {
       "path": "/manga/{seriesId}",
+      "useWebView": false,
       "selector": {
-        "list": "div#chapters div[data-filter-list] a",
+        "list": "#chapters > div > a",
         "id": "@href | regex:/\\/chapters\\/(.+)/",
         "title": "@text"
       }
     },
     "pages": {
       "path": "/chapters/{seriesId}/{chapterSlug}",
+      "waitForSelector": "picture img",
       "selector": {
-        "pages": "chapter-page img.js-page",
+        "pages": "picture img",
         "src": "data-src",
         "title": "h1"
       }
