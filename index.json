@@ -15,6 +15,41 @@
       "contentType": "image"
     },
     {
+      "id": "toonily",
+      "name": "Toonily",
+      "version": 1,
+      "lang": "en",
+      "contentType": "image"
+    },
+    {
+      "id": "manhuaus",
+      "name": "Manhua Us",
+      "version": 1,
+      "lang": "en",
+      "contentType": "image"
+    },
+    {
+      "id": "mangapill",
+      "name": "Manga Pill",
+      "version": 1,
+      "lang": "en",
+      "contentType": "image"
+    },
+    {
+      "id": "dynastyscans",
+      "name": "Dynasty Scans",
+      "version": 1,
+      "lang": "en",
+      "contentType": "image"
+    },
+    {
+      "id": "weebcentral",
+      "name": "Weeb Central",
+      "version": 1,
+      "lang": "en",
+      "contentType": "image"
+    },
+    {
       "id": "novelbin",
       "name": "Novel Bin",
       "version": 15,
@@ -25,6 +60,26 @@
       "id": "royalroad",
       "name": "Royal Road",
       "version": 5,
+      "lang": "en",
+      "contentType": "text"
+    },
+    {
+      "id": "freewebnovel",
+      "name": "Free Web Novel",
+      "version": 1,
+      "lang": "en",
+      "contentType": "text"
+    }    {
+      "id": "novelfire",
+      "name": "Novel Fire",
+      "version": 1,
+      "lang": "en",
+      "contentType": "text"
+    },
+    {
+      "id": "scribblehub",
+      "name": "Scribble Hub",
+      "version": 1,
       "lang": "en",
       "contentType": "text"
     }
