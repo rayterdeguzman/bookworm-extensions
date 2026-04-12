@@ -1,7 +1,7 @@
 {
   "id": "ravenscans",
   "name": "Raven Scans (Yaksha)",
-  "version": 9,
+  "version": 10,
   "lang": "en",
   "baseUrl": "https://ravenscans.org",
   "contentType": "image",
@@ -135,7 +135,7 @@
       "isApi": false,
       "selector": {
         "pages": "#readerarea img",
-        "src": "data-src",
+        "src": "src",
         "title": "h1.entry-title"
       }
     }
