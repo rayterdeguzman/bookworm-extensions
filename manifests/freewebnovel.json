@@ -1,7 +1,7 @@
 {
   "id": "freewebnovel",
   "name": "FreeWebNovel",
-  "version": 4,
+  "version": 5,
   "lang": "en",
   "baseUrl": "https://freewebnovel.com",
   "contentType": "text",
@@ -19,9 +19,9 @@
     {
       "name": "Sort",
       "type": "select",
-      "options": ["Most Popular", "Latest Release", "Latest Novels", "Completed"],
-      "values": ["most-popular", "latest-release", "latest-novel", "completed-novel"],
-      "defaultValue": "most-popular"
+      "options": ["Latest Release", "Latest Novels", "Completed"],
+      "values": ["latest-release", "latest-novel", "completed-novel"],
+      "defaultValue": "latest-release"
     },
     {
       "name": "Genre",
