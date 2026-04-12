@@ -1,12 +1,12 @@
 {
   "id": "mangapill",
   "name": "MangaPill",
-  "version": 3,
+  "version": 4,
   "lang": "en",
   "baseUrl": "https://mangapill.com",
   "contentType": "image",
   "supportsLatest": true,
-  "useWebView": true,
+  "useWebView": false,
   "rateLimit": {
     "requests": 2,
     "perSeconds": 1
