@@ -1,7 +1,7 @@
 {
   "id": "weebcentral",
   "name": "WeebCentral",
-  "version": 4,
+  "version": 5,
   "lang": "en",
   "baseUrl": "https://weebcentral.com",
   "contentType": "image",
@@ -168,9 +168,9 @@
       "path": "/series/{seriesId}/full-chapter-list",
       "isApi": false,
       "selector": {
-        "list": "div.flex.items-center",
-        "id": "a[href*='/chapters/']@href | regex:/\\/chapters\\/([A-Z0-9]+)/",
-        "title": "span.grow > span:first-child",
+        "list": "div[x-data] > a",
+        "id": "@href | regex:/\\/chapters\\/([A-Z0-9]+)/",
+        "title": "span.flex > span",
         "dateUploaded": "time@datetime"
       }
     },
