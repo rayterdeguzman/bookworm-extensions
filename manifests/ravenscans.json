@@ -1,7 +1,7 @@
 {
   "id": "ravenscans",
   "name": "Raven Scans (Yaksha)",
-  "version": 10,
+  "version": 11,
   "lang": "en",
   "baseUrl": "https://ravenscans.org",
   "contentType": "image",
@@ -112,6 +112,7 @@
     "details": {
       "path": "/manga/{seriesId}/",
       "isApi": false,
+      "useWebView": false,
       "selector": {
         "title": "h1.entry-title",
         "coverUrl": "div.thumb img@src",
@@ -123,6 +124,7 @@
     "chapters": {
       "path": "/manga/{seriesId}/",
       "isApi": false,
+      "useWebView": false,
       "selector": {
         "list": "#chapterlist ul li",
         "id": ".eph-num a@href | regex:/([^\\/]+)\\/?$/",
@@ -133,6 +135,7 @@
     "pages": {
       "path": "/{chapterSlug}/",
       "isApi": false,
+      "useWebView": false,
       "selector": {
         "pages": "#readerarea img",
         "src": "src",
