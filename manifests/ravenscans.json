@@ -1,11 +1,11 @@
 {
   "id": "ravenscans",
   "name": "Raven Scans (Yaksha)",
-  "version": 11,
+  "version": 12,
   "lang": "en",
-  "baseUrl": "https://ravenscans.org",
+  "baseUrl": "https://ravenscans.me",
   "contentType": "image",
-  "isApi": true,
+  "isApi": false,
   "supportsLatest": true,
   "useWebView": true,
   "rateLimit": {
@@ -13,7 +13,7 @@
     "perSeconds": 1
   },
   "headers": {
-    "Referer": "https://ravenscans.org/"
+    "Referer": "https://ravenscans.me/"
   },
   "filters": [
     {
@@ -61,7 +61,7 @@
   ],
   "endpoints": {
     "search": {
-      "path": "/manga/",
+      "path": "/series/",
       "isApi": false,
       "params": {
         "s": "{query}",
@@ -73,14 +73,14 @@
       },
       "selector": {
         "list": "div.bsx",
-        "id": "a@href | regex:/\\/manga\\/([^\\/]+)/",
+        "id": "a@href | regex:/\\/series\\/([^\\/]+)/",
         "title": ".tt",
         "coverUrl": ".limit img@src"
       },
       "nextPageSelector": "a.next.page-numbers"
     },
     "popular": {
-      "path": "/manga/",
+      "path": "/series/",
       "isApi": false,
       "params": {
         "order": "popular",
@@ -88,14 +88,14 @@
       },
       "selector": {
         "list": "div.bsx",
-        "id": "a@href | regex:/\\/manga\\/([^\\/]+)/",
+        "id": "a@href | regex:/\\/series\\/([^\\/]+)/",
         "title": ".tt",
         "coverUrl": ".limit img@src"
       },
       "nextPageSelector": "a.next.page-numbers"
     },
     "latest": {
-      "path": "/manga/",
+      "path": "/series/",
       "isApi": false,
       "params": {
         "order": "update",
@@ -103,14 +103,14 @@
       },
       "selector": {
         "list": "div.bsx",
-        "id": "a@href | regex:/\\/manga\\/([^\\/]+)/",
+        "id": "a@href | regex:/\\/series\\/([^\\/]+)/",
         "title": ".tt",
         "coverUrl": ".limit img@src"
       },
       "nextPageSelector": "a.next.page-numbers"
     },
     "details": {
-      "path": "/manga/{seriesId}/",
+      "path": "/series/{seriesId}/",
       "isApi": false,
       "useWebView": false,
       "selector": {
@@ -122,7 +122,7 @@
       }
     },
     "chapters": {
-      "path": "/manga/{seriesId}/",
+      "path": "/series/{seriesId}/",
       "isApi": false,
       "useWebView": false,
       "selector": {
