@@ -1,7 +1,7 @@
 {
   "id": "ravenscans",
   "name": "Raven Scans (Yaksha)",
-  "version": 17,
+  "version": 19,
   "lang": "en",
   "baseUrl": "https://ravenscans.me",
   "contentType": "image",
@@ -19,8 +19,8 @@
     {
       "name": "Order",
       "type": "select",
-      "options": ["Popular", "Latest Update", "Latest Added", "A-Z", "Z-A"],
-      "values": ["trending", "latest", "new-manga", "alphabet", "alphabetrev"],
+      "options": ["Trending", "Latest", "New", "A-Z", "Rating"],
+      "values": ["trending", "latest", "new-manga", "alphabet", "rating"],
       "defaultValue": "trending"
     },
     {
@@ -65,7 +65,6 @@
       "isApi": false,
       "params": {
         "s": "{query}",
-        "m_orderby": "{Order}",
         "paged": "{page}"
       },
       "selector": {
@@ -77,34 +76,50 @@
       "nextPageSelector": "a.next.page-numbers"
     },
     "popular": {
-      "path": "/series/",
+      "path": "/wp-admin/admin-ajax.php",
+      "method": "POST",
       "isApi": false,
+      "useWebView": false,
+      "allowEmptyParams": true,
       "params": {
-        "m_orderby": "trending",
-        "paged": "{page}"
+        "action": "madara_load_more",
+        "page": "{(page-1)}",
+        "template": "madara-core/content/content-archive",
+        "vars[orderby]": "{Order}",
+        "vars[sidebar]": "full",
+        "vars[paged]": "1",
+        "vars[meta_key]": "",
+        "vars[order]": "DESC"
       },
       "selector": {
-        "list": "div.bsx",
+        "list": ".page-item-detail",
         "id": "a@href | regex:/\\/series\\/([^\\/]+)/",
-        "title": ".tt",
-        "coverUrl": ".limit img@src"
-      },
-      "nextPageSelector": "a.next.page-numbers"
+        "title": ".post-title a",
+        "coverUrl": "img@src"
+      }
     },
     "latest": {
-      "path": "/series/",
+      "path": "/wp-admin/admin-ajax.php",
+      "method": "POST",
       "isApi": false,
+      "useWebView": false,
+      "allowEmptyParams": true,
       "params": {
-        "m_orderby": "latest",
-        "paged": "{page}"
+        "action": "madara_load_more",
+        "page": "{(page-1)}",
+        "template": "madara-core/content/content-archive",
+        "vars[orderby]": "latest",
+        "vars[sidebar]": "full",
+        "vars[paged]": "1",
+        "vars[meta_key]": "",
+        "vars[order]": "DESC"
       },
       "selector": {
-        "list": "div.bsx",
+        "list": ".page-item-detail",
         "id": "a@href | regex:/\\/series\\/([^\\/]+)/",
-        "title": ".tt",
-        "coverUrl": ".limit img@src"
-      },
-      "nextPageSelector": "a.next.page-numbers"
+        "title": ".post-title a",
+        "coverUrl": "img@src"
+      }
     },
     "details": {
       "path": "/series/{seriesId}/",
