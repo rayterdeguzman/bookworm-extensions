@@ -1,7 +1,7 @@
 {
   "id": "ravenscans",
   "name": "Raven Scans (Yaksha)",
-  "version": 14,
+  "version": 15,
   "lang": "en",
   "baseUrl": "https://ravenscans.me",
   "contentType": "image",
@@ -61,11 +61,13 @@
   ],
   "endpoints": {
     "search": {
-      "path": "/",
+      "path": "/series/",
       "isApi": false,
       "params": {
         "s": "{query}",
-        "post_type": "wp-manga"
+        "post_type": "wp-manga",
+        "m_orderby": "{Order}",
+        "paged": "{page}"
       },
       "selector": {
         "list": "div.bsx",
@@ -131,7 +133,6 @@
     "pages": {
       "path": "/{chapterSlug}/",
       "isApi": false,
-      "useWebView": false,
       "selector": {
         "pages": "#readerarea img",
         "src": "src",
