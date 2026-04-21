@@ -1,7 +1,7 @@
 {
   "id": "ravenscans",
   "name": "Raven Scans (Yaksha)",
-  "version": 19,
+  "version": 20,
   "lang": "en",
   "baseUrl": "https://ravenscans.me",
   "contentType": "image",
@@ -16,13 +16,6 @@
     "Referer": "https://ravenscans.me/"
   },
   "filters": [
-    {
-      "name": "Order",
-      "type": "select",
-      "options": ["Trending", "Latest", "New", "A-Z", "Rating"],
-      "values": ["trending", "latest", "new-manga", "alphabet", "rating"],
-      "defaultValue": "trending"
-    },
     {
       "name": "Status",
       "type": "select",
@@ -76,50 +69,32 @@
       "nextPageSelector": "a.next.page-numbers"
     },
     "popular": {
-      "path": "/wp-admin/admin-ajax.php",
-      "method": "POST",
+      "path": "/series/",
       "isApi": false,
-      "useWebView": false,
-      "allowEmptyParams": true,
       "params": {
-        "action": "madara_load_more",
-        "page": "{(page-1)}",
-        "template": "madara-core/content/content-archive",
-        "vars[orderby]": "{Order}",
-        "vars[sidebar]": "full",
-        "vars[paged]": "1",
-        "vars[meta_key]": "",
-        "vars[order]": "DESC"
+        "paged": "{page}"
       },
       "selector": {
-        "list": ".page-item-detail",
+        "list": "div.bsx",
         "id": "a@href | regex:/\\/series\\/([^\\/]+)/",
-        "title": ".post-title a",
-        "coverUrl": "img@src"
-      }
+        "title": ".tt",
+        "coverUrl": ".limit img@src"
+      },
+      "nextPageSelector": "a.next.page-numbers"
     },
     "latest": {
-      "path": "/wp-admin/admin-ajax.php",
-      "method": "POST",
+      "path": "/series/",
       "isApi": false,
-      "useWebView": false,
-      "allowEmptyParams": true,
       "params": {
-        "action": "madara_load_more",
-        "page": "{(page-1)}",
-        "template": "madara-core/content/content-archive",
-        "vars[orderby]": "latest",
-        "vars[sidebar]": "full",
-        "vars[paged]": "1",
-        "vars[meta_key]": "",
-        "vars[order]": "DESC"
+        "paged": "{page}"
       },
       "selector": {
-        "list": ".page-item-detail",
+        "list": "div.bsx",
         "id": "a@href | regex:/\\/series\\/([^\\/]+)/",
-        "title": ".post-title a",
-        "coverUrl": "img@src"
-      }
+        "title": ".tt",
+        "coverUrl": ".limit img@src"
+      },
+      "nextPageSelector": "a.next.page-numbers"
     },
     "details": {
       "path": "/series/{seriesId}/",
