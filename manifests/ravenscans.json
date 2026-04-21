@@ -1,7 +1,7 @@
 {
   "id": "ravenscans",
   "name": "Raven Scans (Yaksha)",
-  "version": 12,
+  "version": 13,
   "lang": "en",
   "baseUrl": "https://ravenscans.me",
   "contentType": "image",
@@ -20,8 +20,8 @@
       "name": "Order",
       "type": "select",
       "options": ["Popular", "Latest Update", "Latest Added", "A-Z", "Z-A"],
-      "values": ["popular", "update", "latest", "title", "titlereverse"],
-      "defaultValue": "popular"
+      "values": ["trending", "latest", "new-manga", "alphabet", "alphabetrev"],
+      "defaultValue": "trending"
     },
     {
       "name": "Status",
@@ -49,12 +49,12 @@
         "Smut", "Sports", "Supernatural", "Tragedy", "Yaoi", "Yuri"
       ],
       "values": [
-        "4", "43", "27", "5", "12", "13",
-        "6", "51", "14", "7", "33",
-        "44", "8", "45", "59", "46",
-        "47", "9", "28", "40", "49",
-        "50", "52", "10", "53", "54",
-        "48", "55", "24", "56", "57", "58"
+        "action", "adult", "adventure", "comedy", "drama", "ecchi",
+        "fantasy", "gender-bender", "harem", "historical", "horror",
+        "josei", "martial-arts", "mature", "mecha", "mystery",
+        "psychological", "romance", "school-life", "sci-fi", "seinen",
+        "shoujo", "shoujo-ai", "shounen", "shounen-ai", "slice-of-life",
+        "smut", "sports", "supernatural", "tragedy", "yaoi", "yuri"
       ],
       "defaultValue": []
     }
@@ -65,11 +65,7 @@
       "isApi": false,
       "params": {
         "s": "{query}",
-        "page": "{page}",
-        "order": "{Order}",
-        "status": "{Status}",
-        "type": "{Type}",
-        "genre[]": "{Genre}"
+        "post_type": "wp-manga"
       },
       "selector": {
         "list": "div.bsx",
@@ -80,11 +76,10 @@
       "nextPageSelector": "a.next.page-numbers"
     },
     "popular": {
-      "path": "/series/",
+      "path": "/series/page/{page}/",
       "isApi": false,
       "params": {
-        "order": "popular",
-        "page": "{page}"
+        "m_orderby": "trending"
       },
       "selector": {
         "list": "div.bsx",
@@ -95,11 +90,10 @@
       "nextPageSelector": "a.next.page-numbers"
     },
     "latest": {
-      "path": "/series/",
+      "path": "/series/page/{page}/",
       "isApi": false,
       "params": {
-        "order": "update",
-        "page": "{page}"
+        "m_orderby": "latest"
       },
       "selector": {
         "list": "div.bsx",
