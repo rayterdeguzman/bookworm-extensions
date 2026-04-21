@@ -1,7 +1,7 @@
 {
   "id": "ravenscans",
   "name": "Raven Scans (Yaksha)",
-  "version": 13,
+  "version": 14,
   "lang": "en",
   "baseUrl": "https://ravenscans.me",
   "contentType": "image",
@@ -61,7 +61,7 @@
   ],
   "endpoints": {
     "search": {
-      "path": "/series/",
+      "path": "/",
       "isApi": false,
       "params": {
         "s": "{query}",
@@ -76,10 +76,11 @@
       "nextPageSelector": "a.next.page-numbers"
     },
     "popular": {
-      "path": "/series/page/{page}/",
+      "path": "/series/",
       "isApi": false,
       "params": {
-        "m_orderby": "trending"
+        "m_orderby": "trending",
+        "paged": "{page}"
       },
       "selector": {
         "list": "div.bsx",
@@ -90,10 +91,11 @@
       "nextPageSelector": "a.next.page-numbers"
     },
     "latest": {
-      "path": "/series/page/{page}/",
+      "path": "/series/",
       "isApi": false,
       "params": {
-        "m_orderby": "latest"
+        "m_orderby": "latest",
+        "paged": "{page}"
       },
       "selector": {
         "list": "div.bsx",
