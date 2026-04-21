@@ -1,7 +1,7 @@
 {
   "id": "ravenscans",
   "name": "Raven Scans (Yaksha)",
-  "version": 21,
+  "version": 22,
   "lang": "en",
   "baseUrl": "https://ravenscans.me",
   "contentType": "image",
@@ -63,7 +63,7 @@
     "search": {
       "path": "/series/",
       "isApi": false,
-      "postLoadJs": "var r=document.querySelector('input[name=\"order\"][value=\"{Order}\"]');if(r)r.click();",
+      "postLoadJs": "var r=document.querySelector('input[name=\"order\"][value=\"{Order}\"]');if(r){r.checked=true;r.dispatchEvent(new Event('change',{bubbles:true}));r.dispatchEvent(new Event('input',{bubbles:true}));}",
       "params": {
         "s": "{query}",
         "paged": "{page}"
@@ -79,7 +79,7 @@
     "popular": {
       "path": "/series/",
       "isApi": false,
-      "postLoadJs": "var r=document.querySelector('input[name=\"order\"][value=\"popular\"]');if(r)r.click();",
+      "postLoadJs": "var r=document.querySelector('input[name=\"order\"][value=\"popular\"]');if(r){r.checked=true;r.dispatchEvent(new Event('change',{bubbles:true}));r.dispatchEvent(new Event('input',{bubbles:true}));}",
       "params": {
         "paged": "{page}"
       },
@@ -94,7 +94,7 @@
     "latest": {
       "path": "/series/",
       "isApi": false,
-      "postLoadJs": "var r=document.querySelector('input[name=\"order\"][value=\"update\"]');if(r)r.click();",
+      "postLoadJs": "var r=document.querySelector('input[name=\"order\"][value=\"update\"]');if(r){r.checked=true;r.dispatchEvent(new Event('change',{bubbles:true}));r.dispatchEvent(new Event('input',{bubbles:true}));}",
       "params": {
         "paged": "{page}"
       },
