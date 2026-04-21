@@ -1,7 +1,7 @@
 {
   "id": "ravenscans",
   "name": "Raven Scans (Yaksha)",
-  "version": 15,
+  "version": 16,
   "lang": "en",
   "baseUrl": "https://ravenscans.me",
   "contentType": "image",
@@ -16,13 +16,6 @@
     "Referer": "https://ravenscans.me/"
   },
   "filters": [
-    {
-      "name": "Order",
-      "type": "select",
-      "options": ["Popular", "Latest Update", "Latest Added", "A-Z", "Z-A"],
-      "values": ["trending", "latest", "new-manga", "alphabet", "alphabetrev"],
-      "defaultValue": "trending"
-    },
     {
       "name": "Status",
       "type": "select",
@@ -65,8 +58,6 @@
       "isApi": false,
       "params": {
         "s": "{query}",
-        "post_type": "wp-manga",
-        "m_orderby": "{Order}",
         "paged": "{page}"
       },
       "selector": {
