@@ -1,7 +1,7 @@
 {
   "id": "ravenscans",
   "name": "Raven Scans (Yaksha)",
-  "version": 20,
+  "version": 21,
   "lang": "en",
   "baseUrl": "https://ravenscans.me",
   "contentType": "image",
@@ -16,6 +16,13 @@
     "Referer": "https://ravenscans.me/"
   },
   "filters": [
+    {
+      "name": "Order",
+      "type": "select",
+      "options": ["Default", "Popular", "Latest Update", "Newly Added", "A-Z", "Z-A"],
+      "values": ["", "popular", "update", "latest", "title", "titlereverse"],
+      "defaultValue": ""
+    },
     {
       "name": "Status",
       "type": "select",
@@ -56,6 +63,7 @@
     "search": {
       "path": "/series/",
       "isApi": false,
+      "postLoadJs": "var r=document.querySelector('input[name=\"order\"][value=\"{Order}\"]');if(r)r.click();",
       "params": {
         "s": "{query}",
         "paged": "{page}"
@@ -71,6 +79,7 @@
     "popular": {
       "path": "/series/",
       "isApi": false,
+      "postLoadJs": "var r=document.querySelector('input[name=\"order\"][value=\"popular\"]');if(r)r.click();",
       "params": {
         "paged": "{page}"
       },
@@ -85,6 +94,7 @@
     "latest": {
       "path": "/series/",
       "isApi": false,
+      "postLoadJs": "var r=document.querySelector('input[name=\"order\"][value=\"update\"]');if(r)r.click();",
       "params": {
         "paged": "{page}"
       },
