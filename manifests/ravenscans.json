@@ -1,7 +1,7 @@
 {
   "id": "ravenscans",
   "name": "Raven Scans (Yaksha)",
-  "version": 25,
+  "version": 26,
   "lang": "en",
   "baseUrl": "https://ravenscans.org",
   "contentType": "image",
@@ -54,7 +54,7 @@
   ],
   "endpoints": {
     "search": {
-      "path": "/series/",
+      "path": "/manga/",
       "isApi": false,
       "params": {
         "s": "{query}",
@@ -62,42 +62,42 @@
       },
       "selector": {
         "list": "div.bsx",
-        "id": "a@href | regex:/\\/series\\/([^\\/]+)/",
+        "id": "a@href | regex:/\\/manga\\/([^\\/]+)/",
         "title": ".tt",
         "coverUrl": ".limit img@src"
       },
       "nextPageSelector": "a.next.page-numbers"
     },
     "popular": {
-      "path": "/series/",
+      "path": "/manga/",
       "isApi": false,
       "params": {
         "paged": "{page}"
       },
       "selector": {
         "list": "div.bsx",
-        "id": "a@href | regex:/\\/series\\/([^\\/]+)/",
+        "id": "a@href | regex:/\\/manga\\/([^\\/]+)/",
         "title": ".tt",
         "coverUrl": ".limit img@src"
       },
       "nextPageSelector": "a.next.page-numbers"
     },
     "latest": {
-      "path": "/series/",
+      "path": "/manga/",
       "isApi": false,
       "params": {
         "paged": "{page}"
       },
       "selector": {
         "list": "div.bsx",
-        "id": "a@href | regex:/\\/series\\/([^\\/]+)/",
+        "id": "a@href | regex:/\\/manga\\/([^\\/]+)/",
         "title": ".tt",
         "coverUrl": ".limit img@src"
       },
       "nextPageSelector": "a.next.page-numbers"
     },
     "details": {
-      "path": "/series/{seriesId}/",
+      "path": "/manga/{seriesId}/",
       "isApi": false,
       "useWebView": false,
       "selector": {
@@ -109,7 +109,7 @@
       }
     },
     "chapters": {
-      "path": "/series/{seriesId}/",
+      "path": "/manga/{seriesId}/",
       "isApi": false,
       "useWebView": false,
       "selector": {
