@@ -1,7 +1,7 @@
 {
   "id": "ravenscans",
   "name": "Raven Scans (Yaksha)",
-  "version": 26,
+  "version": 27,
   "lang": "en",
   "baseUrl": "https://ravenscans.org",
   "contentType": "image",
@@ -16,6 +16,13 @@
     "Referer": "https://ravenscans.org/"
   },
   "filters": [
+    {
+      "name": "Order",
+      "type": "select",
+      "options": ["Default", "Popular", "Latest Update", "Newly Added", "A-Z", "Z-A"],
+      "values": ["", "popular", "update", "latest", "title", "titlereverse"],
+      "defaultValue": ""
+    },
     {
       "name": "Status",
       "type": "select",
@@ -58,7 +65,11 @@
       "isApi": false,
       "params": {
         "s": "{query}",
-        "paged": "{page}"
+        "order": "{Order}",
+        "status": "{Status}",
+        "type": "{Type}",
+        "genre[]": "{Genre}",
+        "page": "{page}"
       },
       "selector": {
         "list": "div.bsx",
@@ -72,7 +83,8 @@
       "path": "/manga/",
       "isApi": false,
       "params": {
-        "paged": "{page}"
+        "order": "popular",
+        "page": "{page}"
       },
       "selector": {
         "list": "div.bsx",
@@ -86,7 +98,8 @@
       "path": "/manga/",
       "isApi": false,
       "params": {
-        "paged": "{page}"
+        "order": "update",
+        "page": "{page}"
       },
       "selector": {
         "list": "div.bsx",
