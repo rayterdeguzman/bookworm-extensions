@@ -1,7 +1,7 @@
 {
   "id": "ravenscans",
   "name": "Raven Scans (Yaksha)",
-  "version": 22,
+  "version": 23,
   "lang": "en",
   "baseUrl": "https://ravenscans.me",
   "contentType": "image",
@@ -63,9 +63,9 @@
     "search": {
       "path": "/series/",
       "isApi": false,
-      "postLoadJs": "var r=document.querySelector('input[name=\"order\"][value=\"{Order}\"]');if(r)((function(el){el.checked=true;var e=document.createEvent('Event');e.initEvent('change',true,true);el.dispatchEvent(e)})(r))",
       "params": {
         "s": "{query}",
+        "order": "{Order}",
         "paged": "{page}"
       },
       "selector": {
@@ -79,8 +79,8 @@
     "popular": {
       "path": "/series/",
       "isApi": false,
-      "postLoadJs": "var r=document.querySelector('input[name=\"order\"][value=\"popular\"]');if(r)((function(el){el.checked=true;var e=document.createEvent('Event');e.initEvent('change',true,true);el.dispatchEvent(e)})(r))",
       "params": {
+        "order": "popular",
         "paged": "{page}"
       },
       "selector": {
@@ -94,8 +94,8 @@
     "latest": {
       "path": "/series/",
       "isApi": false,
-      "postLoadJs": "var r=document.querySelector('input[name=\"order\"][value=\"update\"]');if(r)((function(el){el.checked=true;var e=document.createEvent('Event');e.initEvent('change',true,true);el.dispatchEvent(e)})(r))",
       "params": {
+        "order": "update",
         "paged": "{page}"
       },
       "selector": {
